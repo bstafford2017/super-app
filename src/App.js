@@ -22,21 +22,15 @@ const App = () => {
   const [fact, setFact] = useState('')
   const [loading, setLoading] = useState(true)
 
-  const getFact = async () => {
-    setLoading(true)
-    const resJSON = await fetch(
-      'https://uselessfacts.jsph.pl/random.json?language=en'
-    )
-    const res = await resJSON.json()
-    setFact(res.text)
-    setLoading(false)
-  }
-
   useEffect(() => {
-    const fetchData = async () => {
-      await getFact()
-    }
-    fetchData()
+    ;(async () => {
+      setLoading(true)
+      const resJSON = await fetch('https://asli-fun-fact-api.herokuapp.com')
+      const { data } = await resJSON.json()
+      const { fact } = data
+      setFact(fact)
+      setLoading(false)
+    })()
   }, [])
 
   return (
