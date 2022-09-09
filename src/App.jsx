@@ -1,6 +1,8 @@
-import './App.css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
+
+import './App.css'
+import './index.css'
 
 const App = () => {
   const textStyle = {
@@ -22,14 +24,22 @@ const App = () => {
   const [fact, setFact] = useState('')
   const [loading, setLoading] = useState(true)
 
+  const getFact = async () => {
+    setLoading(true)
+    const resJSON = await fetch('https://api.api-ninjas.com/v1/facts', {
+      headers: {
+        "X-Api-Key": "f/Lbqc8xujCtqRs8bZgXlA==xWx0MnDFYDiRDCo7"
+      }
+    })
+    const facts = await resJSON.json()
+    const { fact } = facts[0]
+    setFact(fact)
+    setLoading(false)
+  }
+
   useEffect(() => {
     ;(async () => {
-      setLoading(true)
-      const resJSON = await fetch('https://asli-fun-fact-api.herokuapp.com')
-      const { data } = await resJSON.json()
-      const { fact } = data
-      setFact(fact)
-      setLoading(false)
+      await getFact()
     })()
   }, [])
 
