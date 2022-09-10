@@ -1,52 +1,58 @@
-import React, { CSSProperties, useEffect, useState } from 'react'
-import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
+import React, { CSSProperties, useState } from 'react'
+import Fact from './Fact'
+import Trivia from './Trivia'
+import Riddle from './Riddle'
+import Link from './Link'
+import HistoricalEvent from './HistoricalEvent'
 
 import './App.css'
 import './index.css'
 
+const containerStyle: CSSProperties = {
+  cursor: 'pointer'
+}
+
+enum Type {
+  FACT,
+  TRIVIA,
+  RIDDLE,
+  HISTORICAL_EVENT
+}
+
 const App = (): JSX.Element => {
-  const textStyle: CSSProperties = {
-    fontFamily: 'Open Sans',
-    color: '#FFF',
-    fontSize: '42px'
-  }
-
-  const containerStyle: CSSProperties = {
-    cursor: 'pointer'
-  }
-
-  const [fact, setFact] = useState('')
-  const [loading, setLoading] = useState(true)
-
-  const getFact = async (): Promise<void> => {
-    setLoading(true)
-    const resJSON = await fetch('https://api.api-ninjas.com/v1/facts', {
-      headers: {
-        "X-Api-Key": "f/Lbqc8xujCtqRs8bZgXlA==xWx0MnDFYDiRDCo7"
-      }
-    })
-    const facts = await resJSON.json()
-    const { fact } = facts[0]
-    setFact(fact)
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getFact()
-  }, [])
+  const [type, setType] = useState(Type.FACT)
 
   return (
-    <div className='App' style={containerStyle} onClick={getFact}>
+    <div className='App'>
+      <div style={{ display: 'flex' }}>
+        <Link
+          text='Fact'
+          active={type === Type.FACT}
+          onClick={() => setType(Type.FACT)}
+        />
+        <Link
+          text='Trivia'
+          active={type === Type.TRIVIA}
+          onClick={() => setType(Type.TRIVIA)}
+        />
+        <Link
+          text='Riddle'
+          active={type === Type.RIDDLE}
+          onClick={() => setType(Type.RIDDLE)}
+        />
+        <Link
+          text="Today's Event"
+          active={type === Type.HISTORICAL_EVENT}
+          onClick={() => setType(Type.HISTORICAL_EVENT)}
+        />
+      </div>
       <header className='App-header'>
-        {loading ? (
-          <ClimbingBoxLoader
-            color='#FFF'
-            loading={loading}
-            size={15}
-          />
-        ) : (
-          <p style={textStyle}>{fact}</p>
-        )}
+        <div style={{ margin: '30px' }}>
+          {type === Type.FACT && <Fact />}
+          {type === Type.TRIVIA && <Trivia />}
+          {type === Type.RIDDLE && <Riddle />}
+          {type === Type.HISTORICAL_EVENT && <HistoricalEvent />}
+        </div>
       </header>
     </div>
   )
