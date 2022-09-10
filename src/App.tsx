@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
 
 import './App.css'
 import './index.css'
 
-const App = () => {
-  const textStyle = {
+const App = (): JSX.Element => {
+  const textStyle: CSSProperties = {
     fontFamily: 'Open Sans',
     color: '#FFF',
     fontSize: '42px'
   }
 
-  const containerStyle = {
+  const containerStyle: CSSProperties = {
     cursor: 'pointer'
-  }
-
-  const loadingStyle = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red'
   }
 
   const [fact, setFact] = useState('')
   const [loading, setLoading] = useState(true)
 
-  const getFact = async () => {
+  const getFact = async (): Promise<void> => {
     setLoading(true)
     const resJSON = await fetch('https://api.api-ninjas.com/v1/facts', {
       headers: {
@@ -38,9 +32,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    ;(async () => {
-      await getFact()
-    })()
+    getFact()
   }, [])
 
   return (
@@ -49,7 +41,6 @@ const App = () => {
         {loading ? (
           <ClimbingBoxLoader
             color='#FFF'
-            style={loadingStyle}
             loading={loading}
             size={15}
           />
