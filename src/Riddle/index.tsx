@@ -46,9 +46,7 @@ const Riddle = (): JSX.Element => {
 
   return (
     <div style={{ cursor: 'pointer' }} onClick={onClick}>
-      <p style={textStyle} onClick={onClick}>
-        Q: {question}
-      </p>
+      <p style={textStyle}>Q: {question}</p>
       {showAnswer && <p style={textStyle}>A: {answer} </p>}
     </div>
   )

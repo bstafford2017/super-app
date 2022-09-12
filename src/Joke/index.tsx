@@ -37,9 +37,7 @@ const Joke = (): JSX.Element => {
 
   return (
     <div style={{ cursor: 'pointer' }} onClick={onClick}>
-      <p style={textStyle} onClick={onClick}>
-        {joke}
-      </p>
+      <p style={textStyle}>{joke}</p>
     </div>
   )
 }
