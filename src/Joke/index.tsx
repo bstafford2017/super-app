@@ -1,6 +1,7 @@
 import React, { CSSProperties, useEffect, useState } from 'react'
 import { getJoke } from '../Http/client'
 import Loader from '../Loader'
+import Button from '../Button'
 
 const textStyle: CSSProperties = {
   color: '#FFF',
@@ -22,7 +23,7 @@ const Joke = (): JSX.Element => {
     })()
   }, [])
 
-  const onClick = async () => {
+  const generate = async () => {
     setIsLoading(true)
     const response = await getJoke()
     const { data } = response
@@ -36,8 +37,9 @@ const Joke = (): JSX.Element => {
   }
 
   return (
-    <div style={{ cursor: 'pointer' }} onClick={onClick}>
+    <div>
       <p style={textStyle}>{joke}</p>
+      <Button title='Generate new' onClick={generate} />
     </div>
   )
 }

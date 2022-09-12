@@ -1,6 +1,7 @@
 import React, { CSSProperties, useEffect, useState } from 'react'
 import { getHistoricalEvent } from '../Http/client'
 import Loader from '../Loader'
+import Button from '../Button'
 
 const textStyle: CSSProperties = {
   color: '#FFF',
@@ -26,7 +27,11 @@ const HistoricalEvent = (): JSX.Element => {
     return <Loader />
   }
 
-  return <p style={textStyle}>{event}</p>
+  return (
+    <div>
+      <p style={textStyle}>{event}</p>
+    </div>
+  )
 }
 
 export default HistoricalEvent
