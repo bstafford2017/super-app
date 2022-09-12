@@ -20,3 +20,7 @@ export const getHistoricalEvent = (): Promise<any> => {
     }
   })
 }
+
+export const getJoke = (): Promise<any> => {
+  return axios.get('/v1/jokes')
+}

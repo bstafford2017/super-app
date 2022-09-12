@@ -1,5 +1,5 @@
 import React, { CSSProperties, useEffect, useState } from 'react'
-import { getFact } from '../Http/client'
+import { getJoke } from '../Http/client'
 import Loader from '../Loader'
 
 const textStyle: CSSProperties = {
@@ -7,27 +7,27 @@ const textStyle: CSSProperties = {
   fontSize: '42px'
 }
 
-const Fact = (): JSX.Element => {
-  const [fact, setFact] = useState('')
+const Joke = (): JSX.Element => {
+  const [joke, setJoke] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     ;(async () => {
       setIsLoading(true)
-      const response = await getFact()
+      const response = await getJoke()
       const { data } = response
-      const { fact } = data[0]
-      setFact(fact)
+      const { joke } = data[0]
+      setJoke(joke)
       setIsLoading(false)
     })()
   }, [])
 
   const onClick = async () => {
     setIsLoading(true)
-    const response = await getFact()
+    const response = await getJoke()
     const { data } = response
-    const { fact } = data[0]
-    setFact(fact)
+    const { joke } = data[0]
+    setJoke(joke)
     setIsLoading(false)
   }
 
@@ -37,9 +37,11 @@ const Fact = (): JSX.Element => {
 
   return (
     <div style={{ cursor: 'pointer' }} onClick={onClick}>
-      <p style={textStyle}>{fact}</p>
+      <p style={textStyle} onClick={onClick}>
+        {joke}
+      </p>
     </div>
   )
 }
 
-export default Fact
+export default Joke

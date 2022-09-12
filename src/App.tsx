@@ -2,6 +2,7 @@ import React, { CSSProperties, useState } from 'react'
 import Fact from './Fact'
 import Trivia from './Trivia'
 import Riddle from './Riddle'
+import Joke from './Joke'
 import Link from './Link'
 import HistoricalEvent from './HistoricalEvent'
 
@@ -16,7 +17,8 @@ enum Type {
   FACT,
   TRIVIA,
   RIDDLE,
-  HISTORICAL_EVENT
+  HISTORICAL_EVENT,
+  JOKE
 }
 
 const App = (): JSX.Element => {
@@ -41,6 +43,11 @@ const App = (): JSX.Element => {
           onClick={() => setType(Type.RIDDLE)}
         />
         <Link
+          text='Joke'
+          active={type === Type.JOKE}
+          onClick={() => setType(Type.JOKE)}
+        />
+        <Link
           text="Today's Event"
           active={type === Type.HISTORICAL_EVENT}
           onClick={() => setType(Type.HISTORICAL_EVENT)}
@@ -51,6 +58,7 @@ const App = (): JSX.Element => {
           {type === Type.FACT && <Fact />}
           {type === Type.TRIVIA && <Trivia />}
           {type === Type.RIDDLE && <Riddle />}
+          {type === Type.JOKE && <Joke />}
           {type === Type.HISTORICAL_EVENT && <HistoricalEvent />}
         </div>
       </header>

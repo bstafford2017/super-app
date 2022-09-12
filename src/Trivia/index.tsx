@@ -25,8 +25,19 @@ const Trivia = (): JSX.Element => {
     })()
   }, [])
 
-  const onClick = () => {
-    setShowAnswer(true)
+  const onClick = async () => {
+    if (showAnswer) {
+      setIsLoading(true)
+      const response = await getTrivia()
+      const { data } = response
+      const { question, answer } = data[0]
+      setQuestion(question)
+      setAnswer(answer)
+      setIsLoading(false)
+      setShowAnswer(false)
+    } else {
+      setShowAnswer(true)
+    }
   }
 
   if (isLoading) {
@@ -34,12 +45,10 @@ const Trivia = (): JSX.Element => {
   }
 
   return (
-    <>
-      <p style={{ ...textStyle, cursor: 'pointer' }} onClick={onClick}>
-        Q: {question}
-      </p>
+    <div style={{ cursor: 'pointer' }} onClick={onClick}>
+      <p style={textStyle}>Q: {question}</p>
       {showAnswer && <p style={textStyle}>A: {answer} </p>}
-    </>
+    </div>
   )
 }
 
