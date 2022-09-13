@@ -14,7 +14,13 @@ const containerStyle: CSSProperties = {
   cursor: 'pointer'
 }
 
+const textStyle: CSSProperties = {
+  color: '#CCC',
+  fontSize: '42px'
+}
+
 enum Type {
+  NONE,
   FACT,
   TRIVIA,
   RIDDLE,
@@ -24,7 +30,7 @@ enum Type {
 }
 
 const App = (): JSX.Element => {
-  const [type, setType] = useState(Type.FACT)
+  const [type, setType] = useState(Type.NONE)
 
   return (
     <div className='App'>
@@ -62,6 +68,13 @@ const App = (): JSX.Element => {
       </div>
       <header className='App-header'>
         <div style={{ margin: '30px' }}>
+          {type === Type.NONE && (
+            <div>
+              <p style={textStyle}>
+                <i>Please select an option above</i>
+              </p>
+            </div>
+          )}
           {type === Type.FACT && <Fact />}
           {type === Type.TRIVIA && <Trivia />}
           {type === Type.RIDDLE && <Riddle />}
