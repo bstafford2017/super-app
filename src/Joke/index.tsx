@@ -95,7 +95,7 @@ const Joke = (): JSX.Element => {
         <div style={modalStyle}>
           <div style={modalContent}>
             <p style={{ margin: '5px' }}>
-              <b>Warning:</b> The content you are about to see could include
+              <b>Warning:</b> The content you are about to see may include
               offensive, rude, and derogatory jokes. Are you sure you want to
               continue?
             </p>
