@@ -3,6 +3,7 @@ import Fact from './Fact'
 import Trivia from './Trivia'
 import Riddle from './Riddle'
 import Joke from './Joke'
+import Quote from './Quote'
 import Link from './Link'
 import HistoricalEvent from './HistoricalEvent'
 
@@ -18,7 +19,8 @@ enum Type {
   TRIVIA,
   RIDDLE,
   HISTORICAL_EVENT,
-  JOKE
+  JOKE,
+  QUOTE
 }
 
 const App = (): JSX.Element => {
@@ -48,6 +50,11 @@ const App = (): JSX.Element => {
           onClick={() => setType(Type.JOKE)}
         />
         <Link
+          text='Quote'
+          active={type === Type.QUOTE}
+          onClick={() => setType(Type.QUOTE)}
+        />
+        <Link
           text="Today's Event"
           active={type === Type.HISTORICAL_EVENT}
           onClick={() => setType(Type.HISTORICAL_EVENT)}
@@ -59,6 +66,7 @@ const App = (): JSX.Element => {
           {type === Type.TRIVIA && <Trivia />}
           {type === Type.RIDDLE && <Riddle />}
           {type === Type.JOKE && <Joke />}
+          {type === Type.QUOTE && <Quote />}
           {type === Type.HISTORICAL_EVENT && <HistoricalEvent />}
         </div>
       </header>
