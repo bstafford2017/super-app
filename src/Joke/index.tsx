@@ -1,7 +1,7 @@
 import React, { CSSProperties, useEffect, useState } from 'react'
-import { getJoke } from '../Http/client'
 import Loader from '../Loader'
 import Button from '../Button'
+import useFetch from '../Hooks'
 
 const textStyle: CSSProperties = {
   color: '#FFF',
@@ -39,30 +39,19 @@ const buttonStyle: CSSProperties = {
   borderColor: 'white'
 }
 
-const Joke = (): JSX.Element => {
-  const [joke, setJoke] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+const Joke = () => {
+  const [data, isLoading, refresh] = useFetch('/v1/jokes')
+
   const [showWarning, setShowWarning] = useState(true)
   const [isActiveContinue, setIsActiveContinue] = useState(false)
   const [isActiveClose, setIsActiveClose] = useState(false)
 
   const generate = async () => {
-    setIsLoading(true)
-    const response = await getJoke()
-    const { data } = response
-    const { joke } = data[0]
-    setJoke(joke)
-    setIsLoading(false)
+    refresh({})
   }
 
   const continueModal = async () => {
     setShowWarning(false)
-    setIsLoading(true)
-    const response = await getJoke()
-    const { data } = response
-    const { joke } = data[0]
-    setJoke(joke)
-    setIsLoading(false)
   }
 
   const closeModal = () => {
@@ -89,9 +78,15 @@ const Joke = (): JSX.Element => {
     return <Loader />
   }
 
+  if (!data) {
+    return null
+  }
+
+  const { joke } = data[0] || {}
+
   return (
     <div>
-      {showWarning && (
+      {showWarning ? (
         <div style={modalStyle}>
           <div style={modalContent}>
             <p style={{ margin: '5px' }}>
@@ -123,9 +118,12 @@ const Joke = (): JSX.Element => {
             </button>
           </div>
         </div>
+      ) : (
+        <>
+          <p style={textStyle}>{joke}</p>
+          <Button title='Generate new' onClick={generate} />
+        </>
       )}
-      <p style={textStyle}>{joke}</p>
-      <Button title='Generate new' onClick={generate} />
     </div>
   )
 }

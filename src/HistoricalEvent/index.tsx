@@ -2,30 +2,30 @@ import React, { CSSProperties, useEffect, useState } from 'react'
 import { getHistoricalEvent } from '../Http/client'
 import Loader from '../Loader'
 import Button from '../Button'
+import useFetch from '../Hooks'
 
 const textStyle: CSSProperties = {
   color: '#FFF',
   fontSize: '42px'
 }
 
-const HistoricalEvent = (): JSX.Element => {
-  const [event, setEvent] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+const HistoricalEvent = () => {
+  const [data, loading] = useFetch('/v1/historicalevents', {
+    month: new Date().getMonth(),
+    day: new Date().getDate()
+  })
 
-  useEffect(() => {
-    ;(async () => {
-      setIsLoading(true)
-      const response = await getHistoricalEvent()
-      const { data } = response
-      const { event } = data[0]
-      setEvent(event)
-      setIsLoading(false)
-    })()
-  }, [])
-
-  if (isLoading) {
+  if (loading) {
     return <Loader />
   }
+
+  if (!data) {
+    return null
+  }
+
+  const events = data
+  const mostRecentEvent = events[events.length - 1]
+  const { event } = mostRecentEvent
 
   return (
     <div>

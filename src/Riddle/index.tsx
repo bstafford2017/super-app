@@ -2,55 +2,44 @@ import React, { CSSProperties, useEffect, useState } from 'react'
 import { getRiddle } from '../Http/client'
 import Loader from '../Loader'
 import Button from '../Button'
+import useFetch from '../Hooks'
 
 const textStyle: CSSProperties = {
   color: '#FFF',
   fontSize: '42px'
 }
 
-const Riddle = (): JSX.Element => {
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [showAnswer, setShowAnswer] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+const Riddle = () => {
+  const [data, isLoading, refresh] = useFetch('/v1/riddles')
 
-  useEffect(() => {
-    ;(async () => {
-      setIsLoading(true)
-      const response = await getRiddle()
-      const { data } = response
-      const { question, answer } = data[0]
-      setQuestion(question)
-      setAnswer(answer)
-      setIsLoading(false)
-    })()
-  }, [])
+  const [showAnswer, setShowAnswer] = useState(false)
 
   const show = () => {
     setShowAnswer(true)
-  }
-
-  const generate = async () => {
-    setIsLoading(true)
-    const response = await getRiddle()
-    const { data } = response
-    const { question, answer } = data[0]
-    setQuestion(question)
-    setAnswer(answer)
-    setIsLoading(false)
-    setShowAnswer(false)
   }
 
   if (isLoading) {
     return <Loader />
   }
 
+  if (!data) {
+    return null
+  }
+
+  const { question, answer } = data[0]
+
   return (
     <div>
       <p style={textStyle}>Q: {question}</p>
       {showAnswer && <p style={textStyle}>A: {answer} </p>}
       <Button title='Show answer' disabled={showAnswer} onClick={show} />
-      <Button title='Generate new' onClick={generate} />
+      <Button
+        title='Generate new'
+        onClick={() => {
+          refresh({})
+          setShowAnswer(false)
+        }}
+      />
     </div>
   )
 }
