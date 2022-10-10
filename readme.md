@@ -2,8 +2,7 @@
 
 URL: https://bstafford2017.github.io/fact-app/
 
-## Disclosure
-I do not own or maintain the underlying APIs / data. The content you are about to see may include offensive, rude, and derogatory jokes, please use at your own risk.
+_Note: I do not own or maintain the underlying APIs / data. The content of this link may include offensive, rude, and derogatory jokes, please use at your own risk._
 
 # Updates:
 
