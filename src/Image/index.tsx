@@ -21,7 +21,7 @@ const Image = () => {
 
   return (
     <div>
-      <img src={'data:image/png;base64,' + data} />
+      <img src={'data:image/png;base64,' + data} style={{ display: 'block' }} />
       <Button
         title='Generate new'
         onClick={() => {
