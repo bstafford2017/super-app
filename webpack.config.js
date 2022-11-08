@@ -13,7 +13,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: 'ts-loader'
       },
       {
         test: /\.(js|jsx)$/,
@@ -25,8 +25,8 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
+        type: 'asset/resource'
+      }
     ]
   },
   resolve: {
@@ -38,6 +38,7 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, 'docs'),
-    },
-  },
+      publicPath: '/fact-app'
+    }
+  }
 }

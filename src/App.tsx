@@ -61,16 +61,6 @@ const App = (): JSX.Element => {
           <header className='App-header'>
             <div style={{ margin: '30px' }}>
               <Routes>
-                <Route
-                  path='/'
-                  element={
-                    <div>
-                      <p style={textStyle}>
-                        <i>Please select an option above</i>
-                      </p>
-                    </div>
-                  }
-                />
                 <Route path='/fact-app/fact' element={<Fact />} />
                 <Route path='/fact-app/trivia' element={<Trivia />} />
                 <Route path='/fact-app/riddle' element={<Riddle />} />
@@ -80,6 +70,16 @@ const App = (): JSX.Element => {
                 <Route path='/fact-app/bucket' element={<BucketList />} />
                 <Route path='/fact-app/hobby' element={<Hobby />} />
                 <Route path='/fact-app/event' element={<HistoricalEvent />} />
+                <Route
+                  path='*'
+                  element={
+                    <div>
+                      <p style={textStyle}>
+                        <i>Please select an option above</i>
+                      </p>
+                    </div>
+                  }
+                />
               </Routes>
             </div>
           </header>
