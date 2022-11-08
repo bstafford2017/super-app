@@ -1,10 +1,11 @@
-import React, { CSSProperties, useEffect, useState } from 'react'
+import React, { CSSProperties, useContext, useEffect, useState } from 'react'
 import Loader from '../Loader'
 import Button from '../Button'
 import useFetch from '../Hooks'
+import { BackgroundContext } from '../Contexts'
 
 const textStyle: CSSProperties = {
-  color: '#FFF',
+  color: 'white',
   fontSize: '42px'
 }
 
@@ -21,7 +22,6 @@ const modalStyle: CSSProperties = {
 }
 
 const modalContent: CSSProperties = {
-  backgroundColor: '#282c34',
   margin: '15% auto',
   padding: '20px',
   border: '1px solid #888',
@@ -40,6 +40,7 @@ const buttonStyle: CSSProperties = {
 }
 
 const Joke = () => {
+  const backgroundColor = useContext(BackgroundContext)
   const [data, isLoading, refresh] = useFetch('/v1/jokes')
 
   const [showWarning, setShowWarning] = useState(true)
@@ -88,7 +89,7 @@ const Joke = () => {
     <div>
       {showWarning ? (
         <div style={modalStyle}>
-          <div style={modalContent}>
+          <div style={{ ...modalContent, backgroundColor }}>
             <p style={{ margin: '5px' }}>
               <b>Warning:</b> The content you are about to see may include
               offensive, rude, and derogatory jokes. Are you sure you want to
@@ -97,7 +98,7 @@ const Joke = () => {
             <button
               style={{
                 ...buttonStyle,
-                backgroundColor: isActiveContinue ? '#414754' : '#313640'
+                backgroundColor
               }}
               onClick={continueModal}
               onMouseEnter={enterContinueButton}
@@ -108,7 +109,7 @@ const Joke = () => {
             <button
               style={{
                 ...buttonStyle,
-                backgroundColor: isActiveClose ? '#414754' : '#313640'
+                backgroundColor
               }}
               onClick={closeModal}
               onMouseEnter={enterCloseButton}

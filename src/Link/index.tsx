@@ -28,7 +28,7 @@ const Link = ({
       onMouseLeave={onLeave}
       style={{
         cursor: 'pointer',
-        color: hover ? '#FFF' : '#CCC',
+        color: hover ? '#aaa' : 'white',
         textDecoration: active ? 'underline 2px' : 'none',
         padding: '25px',
         fontSize: '20px'

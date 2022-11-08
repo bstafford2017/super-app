@@ -5,7 +5,7 @@ import Button from '../Button'
 import useFetch from '../Hooks'
 
 const textStyle: CSSProperties = {
-  color: '#FFF',
+  color: 'white',
   fontSize: '42px'
 }
 

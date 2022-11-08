@@ -1,14 +1,12 @@
-import React, { CSSProperties, useState } from 'react'
+import { BackgroundContext } from '../Contexts'
+import React, { CSSProperties, useContext, useState } from 'react'
 
 const buttonStyle: CSSProperties = {
   cursor: 'pointer',
   margin: '25px',
   padding: '15px',
-  color: 'white',
-  backgroundColor: '#282c34',
   fontSize: '24px',
-  borderRadius: '25px',
-  borderColor: 'white'
+  borderRadius: '25px'
 }
 
 interface ButtonProps {
@@ -22,6 +20,8 @@ const Button = ({
   disabled = false,
   onClick
 }: ButtonProps): JSX.Element => {
+  const backgroundColor = useContext(BackgroundContext)
+
   const [isActive, setIsActive] = useState(false)
 
   const onEnter = () => {
@@ -36,7 +36,9 @@ const Button = ({
     <button
       style={{
         ...buttonStyle,
-        backgroundColor: isActive ? '#414754' : '#313640'
+        backgroundColor,
+        color: isActive ? '#aaa' : 'white',
+        borderColor: isActive ? '#aaa' : 'white'
       }}
       disabled={disabled}
       onClick={onClick}

@@ -5,13 +5,13 @@ import Button from '../Button'
 import useFetch from '../Hooks'
 
 const textStyle: CSSProperties = {
-  color: '#FFF',
+  color: 'white',
   fontSize: '42px'
 }
 
 const HistoricalEvent = () => {
   const [data, loading] = useFetch('/v1/historicalevents', {
-    month: new Date().getMonth(),
+    month: new Date().getMonth() + 1,
     day: new Date().getDate()
   })
 
@@ -25,11 +25,21 @@ const HistoricalEvent = () => {
 
   const events = data
   const mostRecentEvent = events[events.length - 1]
-  const { event } = mostRecentEvent
+  const { event, year } = mostRecentEvent
+
+  if (!event) {
+    return (
+      <div>
+        <p style={textStyle}>No historical events today</p>
+      </div>
+    )
+  }
 
   return (
     <div>
-      <p style={textStyle}>{event}</p>
+      <p style={textStyle}>
+        {year}: {event}
+      </p>
     </div>
   )
 }
