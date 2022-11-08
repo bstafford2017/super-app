@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
-
+import { Link as RouterLink } from 'react-router-dom'
 interface LinkProps {
+  to: string
   text: string
-  active: boolean
-  onClick(): void
 }
 
-const Link = ({
-  text = '',
-  active = false,
-  onClick
-}: LinkProps): JSX.Element => {
+const Link = ({ to = '', text = '' }: LinkProps): JSX.Element => {
   const [hover, setHover] = useState(false)
 
   const onEnter = () => {
@@ -21,13 +16,12 @@ const Link = ({
     setHover(false)
   }
 
+  const active = to === window.location.pathname
+
   return (
-    <div
-      onClick={onClick}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
+    <RouterLink
+      to={to}
       style={{
-        cursor: 'pointer',
         color: hover ? '#aaa' : 'white',
         textDecoration: active ? 'underline 2px' : 'none',
         padding: '25px',
@@ -35,7 +29,7 @@ const Link = ({
       }}
     >
       {text}
-    </div>
+    </RouterLink>
   )
 }
 
