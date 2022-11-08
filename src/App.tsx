@@ -48,15 +48,15 @@ const App = (): JSX.Element => {
           }}
         >
           <div style={{ display: 'flex' }}>
-            <Link to='/fact' text='Fact' />
-            <Link to='/trivia' text='Trivia' />
-            <Link to='/riddle' text='Riddle' />
-            <Link to='/quote' text='Quote' />
-            <Link to='/word' text='Word' />
-            <Link to='/image' text='Image' />
-            <Link to='/bucket' text='Bucket List' />
-            <Link to='/hobby' text='Hobby' />
-            <Link to='/event' text="Today's Event" />
+            <Link to='/fact-app/fact' text='Fact' />
+            <Link to='/fact-app/trivia' text='Trivia' />
+            <Link to='/fact-app/riddle' text='Riddle' />
+            <Link to='/fact-app/quote' text='Quote' />
+            <Link to='/fact-app/word' text='Word' />
+            <Link to='/fact-app/image' text='Image' />
+            <Link to='/fact-app/bucket' text='Bucket List' />
+            <Link to='/fact-app/hobby' text='Hobby' />
+            <Link to='/fact-app/event' text="Today's Event" />
           </div>
           <header className='App-header'>
             <div style={{ margin: '30px' }}>
@@ -71,15 +71,15 @@ const App = (): JSX.Element => {
                     </div>
                   }
                 />
-                <Route path='/fact' element={<Fact />} />
-                <Route path='/trivia' element={<Trivia />} />
-                <Route path='/riddle' element={<Riddle />} />
-                <Route path='/quote' element={<Quote />} />
-                <Route path='/word' element={<Word />} />
-                <Route path='/image' element={<Image />} />
-                <Route path='/bucket' element={<BucketList />} />
-                <Route path='/hobby' element={<Hobby />} />
-                <Route path='/event' element={<HistoricalEvent />} />
+                <Route path='/fact-app/fact' element={<Fact />} />
+                <Route path='/fact-app/trivia' element={<Trivia />} />
+                <Route path='/fact-app/riddle' element={<Riddle />} />
+                <Route path='/fact-app/quote' element={<Quote />} />
+                <Route path='/fact-app/word' element={<Word />} />
+                <Route path='/fact-app/image' element={<Image />} />
+                <Route path='/fact-app/bucket' element={<BucketList />} />
+                <Route path='/fact-app/hobby' element={<Hobby />} />
+                <Route path='/fact-app/event' element={<HistoricalEvent />} />
               </Routes>
             </div>
           </header>
