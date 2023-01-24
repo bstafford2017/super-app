@@ -1,6 +1,6 @@
 # Fact App
 
-URL: https://bstafford2017.github.io/fact-app/
+URL: https://bstafford2017.github.io/super-app/
 
 _Note: I do not own or maintain the underlying APIs / data. The content of this link may include offensive, rude, and derogatory jokes, please use at your own risk._
 
