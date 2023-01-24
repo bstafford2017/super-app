@@ -37,6 +37,8 @@ const backgroundColors = [
 
 const backgroundColor = backgroundColors[Math.floor(Math.random() * 7)]
 
+const isFriday = new Date().getDay() === 5
+
 const App = (): JSX.Element => {
   return (
     <BrowserRouter>
@@ -47,29 +49,30 @@ const App = (): JSX.Element => {
             backgroundColor
           }}
         >
+          {isFriday && <p style={textStyle}>Happy Friday!</p>}
           <div style={{ display: 'flex' }}>
-            <Link to='/fact-app/fact' text='Fact' />
-            <Link to='/fact-app/trivia' text='Trivia' />
-            <Link to='/fact-app/riddle' text='Riddle' />
-            <Link to='/fact-app/image' text='Image' />
-            <Link to='/fact-app/bucket' text='Bucket List' />
-            <Link to='/fact-app/chuck' text='Chuck Norris' />
-            <Link to='/fact-app/joke' text='Dad Joke' />
-            <Link to='/fact-app/hobby' text='Hobby' />
-            <Link to='/fact-app/event' text="Today's Event" />
+            <Link to='/super-app/fact' text='Fact' />
+            <Link to='/super-app/trivia' text='Trivia' />
+            <Link to='/super-app/riddle' text='Riddle' />
+            <Link to='/super-app/image' text='Image' />
+            <Link to='/super-app/bucket' text='Bucket List' />
+            <Link to='/super-app/chuck' text='Chuck Norris' />
+            <Link to='/super-app/joke' text='Dad Joke' />
+            <Link to='/super-app/hobby' text='Hobby' />
+            <Link to='/super-app/event' text="Today's Event" />
           </div>
           <header className='App-header'>
             <div style={{ margin: '30px' }}>
               <Routes>
-                <Route path='/fact-app/fact' element={<Fact />} />
-                <Route path='/fact-app/trivia' element={<Trivia />} />
-                <Route path='/fact-app/riddle' element={<Riddle />} />
-                <Route path='/fact-app/image' element={<Image />} />
-                <Route path='/fact-app/bucket' element={<BucketList />} />
-                <Route path='/fact-app/chuck' element={<ChuckNorris />} />
-                <Route path='/fact-app/joke' element={<DadJoke />} />
-                <Route path='/fact-app/hobby' element={<Hobby />} />
-                <Route path='/fact-app/event' element={<HistoricalEvent />} />
+                <Route path='/super-app/fact' element={<Fact />} />
+                <Route path='/super-app/trivia' element={<Trivia />} />
+                <Route path='/super-app/riddle' element={<Riddle />} />
+                <Route path='/super-app/image' element={<Image />} />
+                <Route path='/super-app/bucket' element={<BucketList />} />
+                <Route path='/super-app/chuck' element={<ChuckNorris />} />
+                <Route path='/super-app/joke' element={<DadJoke />} />
+                <Route path='/super-app/hobby' element={<Hobby />} />
+                <Route path='/super-app/event' element={<HistoricalEvent />} />
                 <Route
                   path='*'
                   element={

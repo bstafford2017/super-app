@@ -6,7 +6,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'docs'),
-    publicPath: '/fact-app'
+    publicPath: '/super-app'
   },
   module: {
     rules: [
@@ -37,11 +37,11 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: /./, to: '/fact-app' }]
+      rewrites: [{ from: /./, to: '/super-app' }]
     },
     static: {
       directory: path.join(__dirname, 'docs'),
-      publicPath: '/fact-app'
+      publicPath: '/super-app'
     }
   }
 }
