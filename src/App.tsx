@@ -4,13 +4,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Fact from './Fact'
 import Trivia from './Trivia'
 import Riddle from './Riddle'
-import Quote from './Quote'
 import Link from './Link'
-import Word from './Word'
 import BucketList from './BucketList'
 import Hobby from './Hobby'
 import Image from './Image'
 import HistoricalEvent from './HistoricalEvent'
+import ChuckNorris from './ChuckNorris'
+import DadJoke from './DadJoke'
 import { BackgroundContext } from './Contexts'
 
 import './App.css'
@@ -51,10 +51,10 @@ const App = (): JSX.Element => {
             <Link to='/fact-app/fact' text='Fact' />
             <Link to='/fact-app/trivia' text='Trivia' />
             <Link to='/fact-app/riddle' text='Riddle' />
-            <Link to='/fact-app/quote' text='Quote' />
-            <Link to='/fact-app/word' text='Word' />
             <Link to='/fact-app/image' text='Image' />
             <Link to='/fact-app/bucket' text='Bucket List' />
+            <Link to='/fact-app/chuck' text='Chuck Norris' />
+            <Link to='/fact-app/joke' text='Dad Joke' />
             <Link to='/fact-app/hobby' text='Hobby' />
             <Link to='/fact-app/event' text="Today's Event" />
           </div>
@@ -64,10 +64,10 @@ const App = (): JSX.Element => {
                 <Route path='/fact-app/fact' element={<Fact />} />
                 <Route path='/fact-app/trivia' element={<Trivia />} />
                 <Route path='/fact-app/riddle' element={<Riddle />} />
-                <Route path='/fact-app/quote' element={<Quote />} />
-                <Route path='/fact-app/word' element={<Word />} />
                 <Route path='/fact-app/image' element={<Image />} />
                 <Route path='/fact-app/bucket' element={<BucketList />} />
+                <Route path='/fact-app/chuck' element={<ChuckNorris />} />
+                <Route path='/fact-app/joke' element={<DadJoke />} />
                 <Route path='/fact-app/hobby' element={<Hobby />} />
                 <Route path='/fact-app/event' element={<HistoricalEvent />} />
                 <Route

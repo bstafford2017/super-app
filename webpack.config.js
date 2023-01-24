@@ -36,6 +36,9 @@ module.exports = {
     hints: false
   },
   devServer: {
+    historyApiFallback: {
+      rewrites: [{ from: /./, to: '/fact-app' }]
+    },
     static: {
       directory: path.join(__dirname, 'docs'),
       publicPath: '/fact-app'
