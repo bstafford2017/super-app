@@ -1,4 +1,4 @@
-# Fact App
+# Super App
 
 URL: https://bstafford2017.github.io/super-app/
 
