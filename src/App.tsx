@@ -48,28 +48,28 @@ const App = (): JSX.Element => {
           }}
         >
           <div style={{ display: 'flex' }}>
-            <Link to='/super-app/fact' text='Fact' />
-            <Link to='/super-app/trivia' text='Trivia' />
-            <Link to='/super-app/riddle' text='Riddle' />
-            <Link to='/super-app/image' text='Image' />
-            <Link to='/super-app/bucket' text='Bucket List' />
-            <Link to='/super-app/chuck' text='Chuck Norris' />
-            <Link to='/super-app/joke' text='Dad Joke' />
-            <Link to='/super-app/hobby' text='Hobby' />
-            <Link to='/super-app/event' text="Today's Event" />
+            <Link to='/fact' text='Fact' />
+            <Link to='/trivia' text='Trivia' />
+            <Link to='/riddle' text='Riddle' />
+            <Link to='/image' text='Image' />
+            <Link to='/bucket' text='Bucket List' />
+            <Link to='/chuck' text='Chuck Norris' />
+            <Link to='/joke' text='Dad Joke' />
+            <Link to='/hobby' text='Hobby' />
+            <Link to='/event' text="Today's Event" />
           </div>
           <header className='App-header'>
             <div style={{ margin: '30px' }}>
               <Routes>
-                <Route path='/super-app/fact' element={<Fact />} />
-                <Route path='/super-app/trivia' element={<Trivia />} />
-                <Route path='/super-app/riddle' element={<Riddle />} />
-                <Route path='/super-app/image' element={<Image />} />
-                <Route path='/super-app/bucket' element={<BucketList />} />
-                <Route path='/super-app/chuck' element={<ChuckNorris />} />
-                <Route path='/super-app/joke' element={<DadJoke />} />
-                <Route path='/super-app/hobby' element={<Hobby />} />
-                <Route path='/super-app/event' element={<HistoricalEvent />} />
+                <Route path='/fact' element={<Fact />} />
+                <Route path='/trivia' element={<Trivia />} />
+                <Route path='/riddle' element={<Riddle />} />
+                <Route path='/image' element={<Image />} />
+                <Route path='/bucket' element={<BucketList />} />
+                <Route path='/chuck' element={<ChuckNorris />} />
+                <Route path='/joke' element={<DadJoke />} />
+                <Route path='/hobby' element={<Hobby />} />
+                <Route path='/event' element={<HistoricalEvent />} />
                 <Route
                   path='*'
                   element={

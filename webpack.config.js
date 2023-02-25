@@ -34,8 +34,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       favicon: './src/favicon.ico',
-      inject: true,
-      title: 'Super App'
+      inject: true
     })
   ]
 }
