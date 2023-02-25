@@ -37,8 +37,6 @@ const backgroundColors = [
 
 const backgroundColor = backgroundColors[Math.floor(Math.random() * 7)]
 
-const isFriday = new Date().getDay() === 5
-
 const App = (): JSX.Element => {
   return (
     <BrowserRouter>
@@ -49,7 +47,6 @@ const App = (): JSX.Element => {
             backgroundColor
           }}
         >
-          {isFriday && <p style={textStyle}>Happy Friday!</p>}
           <div style={{ display: 'flex' }}>
             <Link to='/super-app/fact' text='Fact' />
             <Link to='/super-app/trivia' text='Trivia' />
