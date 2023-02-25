@@ -35,6 +35,21 @@ Resources:
             Action: 's3:GetObject'
             Resource: !Join ['', ['arn:aws:s3:::', !Ref SuperAppBucket, /*]]
 
+  SuperAppDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultRootObject: index.html
+        CustomerErrorResponses:
+          - SuperAppError:
+            ErrorCode: 403
+            ResponsePagePath: index.html
+            ResponseCode: 200
+        Origins:
+          - SuperAppOrigin:
+            Id: SuperAppOrigin
+            DomainName: http://the-super-app.s3-website.us-east-2.amazonaws.com/
+
 Outputs:
   WebsiteURL:
     Value: !GetAtt SuperAppBucket.WebsiteURL
