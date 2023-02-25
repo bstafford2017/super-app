@@ -1,13 +1,8 @@
-const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/index.tsx',
   mode: 'production',
-  output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'docs'),
-    publicPath: '/super-app'
-  },
   module: {
     rules: [
       {
@@ -35,13 +30,12 @@ module.exports = {
   performance: {
     hints: false
   },
-  devServer: {
-    historyApiFallback: {
-      rewrites: [{ from: /./, to: '/super-app' }]
-    },
-    static: {
-      directory: path.join(__dirname, 'docs'),
-      publicPath: '/super-app'
-    }
-  }
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      favicon: './src/favicon.ico',
+      inject: true,
+      title: 'Super App'
+    })
+  ]
 }
