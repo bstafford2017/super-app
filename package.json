@@ -6,7 +6,7 @@
     "build": "npx webpack",
     "test": "jest --passWithNoTests",
     "provision": "aws cloudformation deploy --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app",
-    "upload": "aws s3 sync dist/ s3://super-app --delete",
+    "upload": "aws s3 sync dist/ s3://the-super-app --delete",
     "deploy": "npm run build && npm run upload"
   },
   "dependencies": {
