@@ -25,9 +25,9 @@ Resources:
         Statement:
           - Sid: PublicReadForGetBucketObjects
             Effect: Allow
-            Principal: '*'
-            Action: 's3:GetObject'
-            Resource: !Join ['', ['arn:aws:s3:::', !Ref SuperAppBucket, /*]]
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Join ["", ["arn:aws:s3:::", !Ref SuperAppBucket, /*]]
 
   SuperAppDistribution:
     Type: AWS::CloudFront::Distribution
@@ -37,7 +37,7 @@ Resources:
           AllowedMethods:
             - GET
             - POST
-          ViewerProtocolPolicy: 'redirect-to-https'
+          ViewerProtocolPolicy: "redirect-to-https"
           TargetOriginId: SuperAppOrigin
         DefaultRootObject: index.html
         Enabled: true
@@ -49,10 +49,10 @@ Resources:
           - Id: SuperAppOrigin
             DomainName:
               !Join [
-                '',
-                'http://',
+                "",
+                "http://",
                 !Ref BucketName,
-                '.s3-website.us-east-2.amazonaws.com/'
+                ".s3-website.us-east-2.amazonaws.com/",
               ]
             CustomOriginConfig:
               HTTPPort: 80
@@ -64,9 +64,7 @@ Resources:
     Properties:
       DomainName:
         !Join [
-          '',
-          'http://',
-          !Ref BucketName,
-          '.s3-website.us-east-2.amazonaws.com/'
+          "",
+          ["http://", !Ref BucketName, ".s3-website.us-east-2.amazonaws.com/"],
         ]
       ValidationMethod: DNS
