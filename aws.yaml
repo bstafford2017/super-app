@@ -50,6 +50,8 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        CNAMEs:
+          - super-app.us
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
