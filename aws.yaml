@@ -7,6 +7,9 @@ Parameters:
   AccountId:
     Description: Unique AWS id for your account. This is the AWS account that the resources will be created and managed in.
     Type: String
+  Certificate:
+    Description: Unique certificate id for SSL.
+    Type: String
 
 Resources:
   SuperAppBucket:
@@ -75,6 +78,18 @@ Resources:
             DomainName: !GetAtt SuperAppBucket.RegionalDomainName
             OriginAccessControlId: !GetAtt SuperAppOriginAccessControl.Id
             S3OriginConfig: {}
+        ViewerCertificate:
+          AcmCertificateArn:
+            !Join [
+              '',
+              [
+                'arn:aws:acm:us-east-1:',
+                !Ref AccountId,
+                ':certificate/',
+                !Ref Certificate,
+              ],
+            ]
+          SslSupportMethod: sni-only
 
   SuperAppOriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl

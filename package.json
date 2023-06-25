@@ -5,7 +5,7 @@
     "start": "npx webpack serve",
     "build": "npx webpack",
     "test": "jest --passWithNoTests",
-    "provision": "aws cloudformation deploy --region us-east-1 --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app AccountId=749936333804",
+    "provision": "aws cloudformation deploy --region us-east-1 --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app AccountId=749936333804 Certificate=3603b0f0-94ac-424f-9e8a-c8c9e775dcf1",
     "upload": "aws s3 sync dist/ s3://the-super-app --delete",
     "deploy": "npm run build && npm run provision && npm run upload"
   },
