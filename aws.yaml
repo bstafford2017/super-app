@@ -102,7 +102,10 @@ Resources:
   SuperAppCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: '*.super-app.com'
+      DomainName: '*.super-app.us'
+      DomainValidationOptions:
+        - DomainName: www.super-app.us
+          HostedZoneId: Z01898142DWDY1JY5FOPD
       ValidationMethod: DNS
 
 Outputs:
