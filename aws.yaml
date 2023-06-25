@@ -107,11 +107,10 @@ Resources:
       RecordSets:
         - Name: _d21020f2986258fa4011d03e361f97fd.www.super-app.us
           Type: CNAME
+          TTL: '300'
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2 # general cloudfront hosted zone id
-            #DNSName: !GetAtt SuperAppDistribution.DomainName
             DNSName: _f30fa6ac6be987bf8cb0e1ddd33c0653.jgjvgkdqrt.acm-validations.aws.
-            TTL: 300
 
 Outputs:
   SuperAppDomain:
