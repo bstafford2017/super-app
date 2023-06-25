@@ -7,9 +7,6 @@ Parameters:
   AccountId:
     Description: Unique AWS id for your account. This is the AWS account that the resources will be created and managed in.
     Type: String
-  Certificate:
-    Description: Unique certificate id for SSL.
-    Type: String
 
 Resources:
   SuperAppBucket:
@@ -79,16 +76,7 @@ Resources:
             OriginAccessControlId: !GetAtt SuperAppOriginAccessControl.Id
             S3OriginConfig: {}
         ViewerCertificate:
-          AcmCertificateArn:
-            !Join [
-              '',
-              [
-                'arn:aws:acm:us-east-1:',
-                !Ref AccountId,
-                ':certificate/',
-                !Ref Certificate,
-              ],
-            ]
+          AcmCertificateArn: !Ref SuperAppCertificate
           SslSupportMethod: sni-only
 
   SuperAppOriginAccessControl:
@@ -110,6 +98,12 @@ Resources:
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2 # general cloudfront hosted zone id
             DNSName: !GetAtt SuperAppDistribution.DomainName
+
+  SuperAppCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: '*.super-app.com'
+      ValidationMethod: DNS
 
 Outputs:
   SuperAppDomain:
