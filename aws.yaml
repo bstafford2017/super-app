@@ -93,7 +93,7 @@ Resources:
     Properties:
       HostedZoneId: Z01898142DWDY1JY5FOPD
       RecordSets:
-        - Name: super-app.us
+        - Name: '*.super-app.us'
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2 # general cloudfront hosted zone id
