@@ -8,6 +8,9 @@ jobs:
     environment: production
 
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
       - name: Deploy to AWS
         run: npm run deploy
         env:
