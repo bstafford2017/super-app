@@ -24,7 +24,7 @@ Resources:
     Properties:
       Bucket: !Ref SuperAppBucket
       PolicyDocument:
-        Id: MyPolicy
+        Id: AllowCloudFrontToAccessS3Bucket
         Version: 2012-10-17
         Statement:
           - Sid: AllowCloudFrontServicePrincipal
@@ -51,7 +51,7 @@ Resources:
     Properties:
       DistributionConfig:
         CNAMEs:
-          - _d21020f2986258fa4011d03e361f97fd.www.super-app.us.
+          - www.super-app.us.
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -105,7 +105,7 @@ Resources:
       DomainName: '*.super-app.us'
       DomainValidationOptions:
         - DomainName: www.super-app.us
-          HostedZoneId: Z01898142DWDY1JY5FOPD
+          HostedZoneId: Z01898142DWDY1JY5FOPD # route 53 zone
       ValidationMethod: DNS
 
 Outputs:
