@@ -105,8 +105,6 @@ Resources:
     Properties:
       HostedZoneId: Z01898142DWDY1JY5FOPD
       RecordSets:
-        - Name: _d21020f2986258fa4011d03e361f97fd.www.super-app.us
-          Type: CNAME
         - Name: super-app.us
           Type: A
           AliasTarget:
