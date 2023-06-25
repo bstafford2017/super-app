@@ -4,16 +4,20 @@ Parameters:
   BucketName:
     Description: Unique name for your bucket. This will be in the S3 url to your React app.
     Type: String
+  AccountId:
+    Description: Unique AWS id for your account. This is the AWS account that the resources will be created and managed in.
+    Type: String
 
 Resources:
   SuperAppBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref BucketName
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
 
   SuperAppBucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -23,11 +27,24 @@ Resources:
         Id: MyPolicy
         Version: 2012-10-17
         Statement:
-          - Sid: PublicReadForGetBucketObjects
+          - Sid: AllowCloudFrontServicePrincipal
             Effect: Allow
-            Principal: '*'
+            Principal:
+              Service: cloudfront.amazonaws.com
             Action: 's3:GetObject'
-            Resource: !Join ['', ['arn:aws:s3:::', !Ref SuperAppBucket, /*]]
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref SuperAppBucket, '/*']]
+            Condition:
+              StringEquals:
+                AWS:SourceArn:
+                  !Join [
+                    '',
+                    [
+                      'arn:aws:cloudfront::',
+                      !Ref AccountId,
+                      ':distribution/',
+                      !Ref SuperAppDistribution,
+                    ],
+                  ]
 
   SuperAppDistribution:
     Type: AWS::CloudFront::Distribution
@@ -36,37 +53,40 @@ Resources:
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
-            - POST
+            - HEAD
+            - OPTIONS
           ViewerProtocolPolicy: 'redirect-to-https'
           TargetOriginId: SuperAppOrigin
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
+          OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # CORS-S3Origin
         DefaultRootObject: index.html
         Enabled: true
         CustomErrorResponses:
           - ErrorCode: 403
-            ResponsePagePath: index.html
+            ResponsePagePath: /index.html
+            ResponseCode: 200
+          - ErrorCode: 404
+            ResponsePagePath: /index.html
             ResponseCode: 200
         Origins:
           - Id: SuperAppOrigin
-            DomainName:
-              !Join [
-                '',
-                'http://',
-                !Ref BucketName,
-                '.s3-website.us-east-2.amazonaws.com/'
-              ]
-            CustomOriginConfig:
-              HTTPPort: 80
-              HTTPSPort: 443
-              OriginProtocolPolicy: https-only
+            DomainName: !GetAtt SuperAppBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt SuperAppOriginAccessControl.Id
+            S3OriginConfig: {}
 
-  SuperAppCert:
-    Type: AWS::CertificateManager::Certificate
+  SuperAppOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
     Properties:
-      DomainName:
-        !Join [
-          '',
-          'http://',
-          !Ref BucketName,
-          '.s3-website.us-east-2.amazonaws.com/'
-        ]
-      ValidationMethod: DNS
+      OriginAccessControlConfig:
+        Name: 'super-app-origin-access-control'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+Outputs:
+  SuperAppDomain:
+    Value: !GetAtt SuperAppDistribution.DomainName
+  CloudFrontDistributionId:
+    Value: !GetAtt SuperAppDistribution.Id
+  SuperAppS3BucketName:
+    Value: !Ref SuperAppBucket

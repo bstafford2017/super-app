@@ -5,9 +5,9 @@
     "start": "npx webpack serve",
     "build": "npx webpack",
     "test": "jest --passWithNoTests",
-    "provision": "aws cloudformation deploy --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app",
+    "provision": "aws cloudformation deploy --region us-east-1 --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app AccountId=749936333804",
     "upload": "aws s3 sync dist/ s3://the-super-app --delete",
-    "deploy": "npm run build && npm run upload"
+    "deploy": "npm run build && npm run provision && npm run upload"
   },
   "dependencies": {
     "react": "^17.0.2",
