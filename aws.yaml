@@ -51,7 +51,7 @@ Resources:
     Properties:
       DistributionConfig:
         CNAMEs:
-          - www.super-app.us.
+          - super-app.us
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
