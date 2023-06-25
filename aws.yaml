@@ -98,6 +98,7 @@ Resources:
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2 # general cloudfront hosted zone id
             DNSName: !GetAtt SuperAppDistribution.DomainName
+            EvaluateTargetHealth: true
 
   SuperAppCertificate:
     Type: AWS::CertificateManager::Certificate
