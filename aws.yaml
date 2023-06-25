@@ -50,8 +50,7 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        CNAMEs:
-          - 'super-app.us'
+        CNAMEs: 'super-app.us'
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -103,9 +102,9 @@ Resources:
   SuperAppCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: super-app.us
+      DomainName: '*.super-app.us'
       DomainValidationOptions:
-        - DomainName: super-app.us
+        - DomainName: '*.super-app.us'
           HostedZoneId: Z01898142DWDY1JY5FOPD # route 53 zone
       ValidationMethod: DNS
 
