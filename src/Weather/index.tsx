@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import Loader from '../Loader';
-import useFetch from '../Hooks';
+import useAxios from '../Hooks/useAxios';
+import { getWeather } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -9,7 +10,7 @@ const textStyle: CSSProperties = {
 };
 
 const Weather = () => {
-  const [data, isLoading] = useFetch('/v1/weather', { zip: '55101' });
+  const [data, isLoading] = useAxios(getWeather);
 
   if (isLoading) {
     return <Loader />;

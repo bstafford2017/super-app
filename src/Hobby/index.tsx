@@ -1,30 +1,27 @@
-import React, { CSSProperties } from 'react'
-import useFetch from '../Hooks'
-import Loader from '../Loader'
-import Button from '../Button'
+import React, { CSSProperties } from 'react';
+import Loader from '../Loader';
+import Button from '../Button';
+import useAxios from '../Hooks/useAxios';
+import { getHobby } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
   fontSize: '42px',
-  display: 'block'
-}
+  display: 'block',
+};
 
 const Hobby = () => {
-  const [data, isLoading, refresh] = useFetch('/v1/hobbies', {
-    params: {
-      category: 'general'
-    }
-  })
+  const [data, isLoading, refresh] = useAxios(getHobby);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (!data) {
-    return null
+    return null;
   }
 
-  const { hobby, link } = data
+  const { hobby, link } = data;
 
   return (
     <div>
@@ -32,13 +29,13 @@ const Hobby = () => {
         {hobby}
       </a>
       <Button
-        title='Generate new'
+        title="Generate new"
         onClick={() => {
-          refresh({})
+          refresh({});
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Hobby
+export default Hobby;

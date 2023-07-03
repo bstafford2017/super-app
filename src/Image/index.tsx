@@ -1,35 +1,36 @@
-import React, { CSSProperties } from 'react'
-import useFetch from '../Hooks'
-import Loader from '../Loader'
-import Button from '../Button'
+import React, { CSSProperties } from 'react';
+import Loader from '../Loader';
+import Button from '../Button';
+import useAxios from '../Hooks/useAxios';
+import { getImage } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
-  fontSize: '42px'
-}
+  fontSize: '42px',
+};
 
 const Image = () => {
-  const [data, isLoading, refresh] = useFetch('/v1/randomimage')
+  const [data, isLoading, refresh] = useAxios(getImage);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (!data) {
-    return null
+    return null;
   }
 
   return (
     <div>
       <img src={'data:image/png;base64,' + data} style={{ display: 'block' }} />
       <Button
-        title='Generate new'
+        title="Generate new"
         onClick={() => {
-          refresh({})
+          refresh({});
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Image
+export default Image;

@@ -1,37 +1,38 @@
-import React, { CSSProperties } from 'react'
-import useFetch from '../Hooks'
-import Loader from '../Loader'
-import Button from '../Button'
+import React, { CSSProperties } from 'react';
+import Loader from '../Loader';
+import Button from '../Button';
+import useAxios from '../Hooks/useAxios';
+import { getBucketList } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
-  fontSize: '42px'
-}
+  fontSize: '42px',
+};
 
 const BucketList = () => {
-  const [data, isLoading, refresh] = useFetch('/v1/bucketlist')
+  const [data, isLoading, refresh] = useAxios(getBucketList);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (!data) {
-    return null
+    return null;
   }
 
-  const { item } = data
+  const { item } = data;
 
   return (
     <div>
       <p style={textStyle}>{item}</p>
       <Button
-        title='Generate new'
+        title="Generate new"
         onClick={() => {
-          refresh({})
+          refresh({});
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default BucketList
+export default BucketList;

@@ -8,14 +8,22 @@ import Link from './Link';
 import BucketList from './BucketList';
 import Hobby from './Hobby';
 import Image from './Image';
-import HistoricalEvent from './HistoricalEvent';
 import DadJoke from './DadJoke';
 import Weather from './Weather';
 import AirQuality from './AirQuality';
+import Word from './Word';
 import { BackgroundContext } from './Contexts';
 
 import './App.css';
 import './index.css';
+import { preFetch } from './Http/client';
+
+const randomRgbColor = () => {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+};
 
 const containerStyle: CSSProperties = {
   cursor: 'pointer',
@@ -26,17 +34,11 @@ const textStyle: CSSProperties = {
   fontSize: '42px',
 };
 
-const backgroundColors = [
-  '#F8B195',
-  '#F67280',
-  '#C06C84',
-  '#6C5B7B',
-  '#0049B7',
-  '#A7226E',
-  '#547980',
-];
+const backgroundColor = randomRgbColor();
 
-const backgroundColor = backgroundColors[Math.floor(Math.random() * 7)];
+(async () => {
+  await preFetch();
+})();
 
 const App = (): JSX.Element => {
   return (
@@ -55,10 +57,10 @@ const App = (): JSX.Element => {
             <Link to="/trivia" text="Trivia" />
             <Link to="/riddle" text="Riddle" />
             <Link to="/image" text="Image" />
+            <Link to="/word" text="Word" />
             <Link to="/bucket" text="Bucket List" />
             <Link to="/joke" text="Dad Joke" />
             <Link to="/hobby" text="Hobby" />
-            <Link to="/event" text="Event" />
           </div>
           <header className="App-header">
             <div style={{ margin: '30px' }}>
@@ -69,10 +71,10 @@ const App = (): JSX.Element => {
                 <Route path="/trivia" element={<Trivia />} />
                 <Route path="/riddle" element={<Riddle />} />
                 <Route path="/image" element={<Image />} />
+                <Route path="/word" element={<Word />} />
                 <Route path="/bucket" element={<BucketList />} />
                 <Route path="/joke" element={<DadJoke />} />
                 <Route path="/hobby" element={<Hobby />} />
-                <Route path="/event" element={<HistoricalEvent />} />
                 <Route
                   path="*"
                   element={

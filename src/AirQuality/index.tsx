@@ -1,6 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import Loader from '../Loader';
-import useFetch from '../Hooks';
+import useAxios from '../Hooks/useAxios';
+import { getAirQuality } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -9,7 +10,7 @@ const textStyle: CSSProperties = {
 };
 
 const AirQuality = () => {
-  const [data, isLoading] = useFetch('/v1/airquality', { city: 'Saint Paul' });
+  const [data, isLoading] = useAxios(getAirQuality);
 
   if (isLoading) {
     return <Loader />;

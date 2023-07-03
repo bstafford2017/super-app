@@ -1,38 +1,39 @@
-import React, { CSSProperties } from 'react'
-import useFetch from '../Hooks'
-import Loader from '../Loader'
-import Button from '../Button'
+import React, { CSSProperties } from 'react';
+import Loader from '../Loader';
+import Button from '../Button';
+import useAxios from '../Hooks/useAxios';
+import { getDadJoke } from '../Http/client';
 
 const textStyle: CSSProperties = {
   color: 'white',
-  fontSize: '42px'
-}
+  fontSize: '42px',
+};
 
 const DadJoke = () => {
-  const [data, isLoading, refresh] = useFetch('/v1/dadjokes?limit=1')
+  const [data, isLoading, refresh] = useAxios(getDadJoke);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (!data) {
-    return null
+    return null;
   }
 
-  const firstJoke = data[0] || {}
-  const { joke } = firstJoke
+  const firstJoke = data[0] || {};
+  const { joke } = firstJoke;
 
   return (
     <div>
       <p style={textStyle}>{joke}</p>
       <Button
-        title='Generate new'
+        title="Generate new"
         onClick={() => {
-          refresh({})
+          refresh({});
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default DadJoke
+export default DadJoke;
