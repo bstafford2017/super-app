@@ -47,7 +47,10 @@ const App = (): JSX.Element => {
         <div
           className="App"
           style={{
-            backgroundColor,
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
+            background:
+              'linear-gradient(180deg, rgba(255,122,113,1) 0%, rgba(250,152,110,1) 100%)',
           }}
         >
           <div style={{ display: 'flex' }}>

@@ -1,8 +1,8 @@
-import React from 'react'
-import { ClimbingBoxLoader } from 'react-spinners'
+import React from 'react';
+import { PuffLoader } from 'react-spinners';
 
 const Loader = (): JSX.Element | null => {
-  return <ClimbingBoxLoader color='white' loading={true} size={15} />
-}
+  return <PuffLoader color="white" loading={true} size={75} />;
+};
 
-export default Loader
+export default Loader;

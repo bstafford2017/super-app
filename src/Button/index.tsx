@@ -1,44 +1,46 @@
-import { BackgroundContext } from '../Contexts'
-import React, { CSSProperties, useContext, useState } from 'react'
+import { BackgroundContext } from '../Contexts';
+import React, { CSSProperties, useContext, useState } from 'react';
 
 const buttonStyle: CSSProperties = {
   cursor: 'pointer',
   margin: '25px',
   padding: '15px',
+  fontFamily: 'Roboto',
   fontSize: '24px',
-  borderRadius: '25px'
-}
+  borderRadius: '25px',
+  borderStyle: 'solid',
+};
 
 interface ButtonProps {
-  title: string
-  disabled?: boolean
-  onClick(e: any): void
+  title: string;
+  disabled?: boolean;
+  onClick(e: any): void;
 }
 
 const Button = ({
   title = '',
   disabled = false,
-  onClick
+  onClick,
 }: ButtonProps): JSX.Element => {
-  const backgroundColor = useContext(BackgroundContext)
+  const backgroundColor = useContext(BackgroundContext);
 
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
 
   const onEnter = () => {
-    setIsActive(true)
-  }
+    setIsActive(true);
+  };
 
   const onLeave = () => {
-    setIsActive(false)
-  }
+    setIsActive(false);
+  };
 
   return (
     <button
       style={{
         ...buttonStyle,
-        backgroundColor,
-        color: isActive ? '#aaa' : 'white',
-        borderColor: isActive ? '#aaa' : 'white'
+        color: isActive ? '#e6e6e6' : 'white',
+        borderColor: isActive ? '#e6e6e6' : 'white',
+        backgroundColor: 'rgba(0,0,0,0)',
       }}
       disabled={disabled}
       onClick={onClick}
@@ -47,7 +49,7 @@ const Button = ({
     >
       {title}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

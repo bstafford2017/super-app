@@ -9,6 +9,14 @@ const textStyle: CSSProperties = {
   margin: '0px',
 };
 
+const leftAlign: CSSProperties = {
+  textAlign: 'left',
+};
+
+const convertToFahrenheit = (val: string): number => {
+  return Math.round(Number(val) * 1.8 + 32);
+};
+
 const Weather = () => {
   const [data, isLoading] = useAxios(getWeather);
 
@@ -33,17 +41,43 @@ const Weather = () => {
 
   return (
     <div>
-      <p style={textStyle}>
+      <h2 style={textStyle}>
         <b>Saint Paul, MN</b>
-      </p>
-      <p style={textStyle}>Temperature: {temp}</p>
-      <p style={textStyle}>Feels like: {feels_like}</p>
-      <p style={textStyle}>High: {max_temp}</p>
-      <p style={textStyle}>Low: {min_temp}</p>
-      <p style={textStyle}>Chance of precipitation: {cloud_pct}</p>
-      <p style={textStyle}>Wind speed: {wind_speed}</p>
-      <p style={textStyle}>Sunrise time: {new Date(sunrise).toTimeString()}</p>
-      <p style={textStyle}>Sunset time: {new Date(sunset).toTimeString()}</p>
+      </h2>
+      <table>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Temperature:</td>
+          <td>{convertToFahrenheit(temp)}&deg;F</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Feels like:</td>
+          <td>{convertToFahrenheit(feels_like)}&deg;F</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>High:</td>
+          <td>{convertToFahrenheit(max_temp)}&deg;F</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Low:</td>
+          <td>{convertToFahrenheit(min_temp)}&deg;</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Precipitation:</td>
+          <td>{cloud_pct}%</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Wind speed:</td>
+          <td>{wind_speed}</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Sunrise time:</td>
+          <td>{new Date(sunrise).toTimeString().split(' ')[0]}</td>
+        </tr>
+        <tr style={textStyle}>
+          <td style={leftAlign}>Sunset time:</td>
+          <td>{new Date(sunset).toTimeString().split(' ')[0]}</td>
+        </tr>
+      </table>
     </div>
   );
 };

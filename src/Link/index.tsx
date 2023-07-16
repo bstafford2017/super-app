@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 interface LinkProps {
-  to: string
-  text: string
+  to: string;
+  text: string;
 }
 
 const Link = ({ to = '', text = '' }: LinkProps): JSX.Element => {
-  const [hover, setHover] = useState(false)
+  const location = useLocation();
+
+  const [hover, setHover] = useState(false);
+  const [active, setActive] = useState(false);
 
   const onEnter = () => {
-    setHover(true)
-  }
+    setHover(true);
+  };
 
   const onLeave = () => {
-    setHover(false)
-  }
+    setHover(false);
+  };
 
-  const active = to === window.location.pathname
+  useEffect(() => {
+    setActive(to === location.pathname);
+  }, [location.pathname]);
 
   return (
     <RouterLink
       to={to}
       style={{
-        color: hover ? '#aaa' : 'white',
+        color: hover ? '#e6e6e6' : 'white',
         textDecoration: active ? 'underline 2px' : 'none',
         padding: '25px',
-        fontSize: '20px'
+        fontSize: '20px',
       }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
     >
       {text}
     </RouterLink>
-  )
-}
+  );
+};
 
-export default Link
+export default Link;
