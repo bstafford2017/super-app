@@ -3,6 +3,7 @@ import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getDadJoke } from '../Http/client';
+import { DadJokeResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -10,7 +11,7 @@ const textStyle: CSSProperties = {
 };
 
 const DadJoke = () => {
-  const [data, isLoading, refresh] = useAxios(getDadJoke);
+  const [data, isLoading, refresh] = useAxios<DadJokeResponse[]>(getDadJoke);
 
   if (isLoading) {
     return <Loader />;
@@ -29,7 +30,7 @@ const DadJoke = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
         }}
       />
     </div>

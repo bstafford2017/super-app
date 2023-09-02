@@ -3,6 +3,7 @@ import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getBucketList } from '../Http/client';
+import { BucketListResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -10,7 +11,8 @@ const textStyle: CSSProperties = {
 };
 
 const BucketList = () => {
-  const [data, isLoading, refresh] = useAxios(getBucketList);
+  const [data, isLoading, refresh] =
+    useAxios<BucketListResponse>(getBucketList);
 
   if (isLoading) {
     return <Loader />;
@@ -28,7 +30,7 @@ const BucketList = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
         }}
       />
     </div>

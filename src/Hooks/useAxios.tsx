@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
 
-const useAxios = (funct: (val: boolean) => any) => {
-  const [data, setData] = useState<any>(null);
+const useAxios = <T,>(
+  funct: (val: boolean) => Promise<AxiosResponse<T>>
+): [
+  T | null,
+  boolean,
+  () => Promise<void>,
+  AxiosError<unknown, any> | null
+] => {
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [shouldRefresh, refresh] = useState<any>({});
+  const [shouldRefresh, _refresh] = useState<any>({});
 
-  const fetch = async (refresh: boolean) => {
+  const fetch = async (refresh: boolean): Promise<void> => {
     setIsLoading(true);
     try {
       const { data: res } = await funct(refresh);
       setData(res);
     } catch (e) {
-      console.error(e);
+      setError(e);
     } finally {
       setIsLoading(false);
     }
@@ -29,6 +38,7 @@ const useAxios = (funct: (val: boolean) => any) => {
     async () => {
       fetch(true);
     },
+    error,
   ];
 };
 

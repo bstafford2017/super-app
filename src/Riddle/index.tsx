@@ -3,6 +3,7 @@ import { getRiddle } from '../Http/client';
 import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
+import { RiddleResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -10,7 +11,7 @@ const textStyle: CSSProperties = {
 };
 
 const Riddle = () => {
-  const [data, isLoading, refresh] = useAxios(getRiddle);
+  const [data, isLoading, refresh] = useAxios<RiddleResponse[]>(getRiddle);
 
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -36,7 +37,7 @@ const Riddle = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
           setShowAnswer(false);
         }}
       />

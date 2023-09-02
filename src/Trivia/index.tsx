@@ -3,6 +3,7 @@ import { getTrivia } from '../Http/client';
 import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
+import { TriviaResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -10,7 +11,7 @@ const textStyle: CSSProperties = {
 };
 
 const Trivia = () => {
-  const [data, isLoading, refresh] = useAxios(getTrivia);
+  const [data, isLoading, refresh] = useAxios<TriviaResponse[]>(getTrivia);
 
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -36,7 +37,7 @@ const Trivia = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
           setShowAnswer(false);
         }}
       />

@@ -2,6 +2,7 @@ import React, { CSSProperties, useState } from 'react';
 import Loader from '../Loader';
 import useAxios from '../Hooks/useAxios';
 import { getAirQuality } from '../Http/client';
+import { AirQualityResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -14,7 +15,7 @@ const leftAlign: CSSProperties = {
 };
 
 const AirQuality = () => {
-  const [data, isLoading] = useAxios(getAirQuality);
+  const [data, isLoading] = useAxios<AirQualityResponse>(getAirQuality);
 
   if (isLoading) {
     return <Loader />;

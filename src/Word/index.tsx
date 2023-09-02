@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import { getWord } from '../Http/client';
 import Loader from '../Loader';
 import useAxios from '../Hooks/useAxios';
+import { WordResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -9,7 +10,7 @@ const textStyle: CSSProperties = {
 };
 
 const Word = () => {
-  const [data, isLoading, refresh] = useAxios(getWord);
+  const [data, isLoading] = useAxios<WordResponse>(getWord);
 
   if (isLoading) {
     return <Loader />;

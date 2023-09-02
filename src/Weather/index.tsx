@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import Loader from '../Loader';
 import useAxios from '../Hooks/useAxios';
 import { getWeather } from '../Http/client';
+import { WeatherResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -18,7 +19,7 @@ const convertToFahrenheit = (val: string): number => {
 };
 
 const Weather = () => {
-  const [data, isLoading] = useAxios(getWeather);
+  const [data, isLoading] = useAxios<WeatherResponse>(getWeather);
 
   if (isLoading) {
     return <Loader />;

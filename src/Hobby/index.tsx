@@ -3,6 +3,7 @@ import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getHobby } from '../Http/client';
+import { HobbyResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -11,7 +12,7 @@ const textStyle: CSSProperties = {
 };
 
 const Hobby = () => {
-  const [data, isLoading, refresh] = useAxios(getHobby);
+  const [data, isLoading, refresh] = useAxios<HobbyResponse>(getHobby);
 
   if (isLoading) {
     return <Loader />;
@@ -31,7 +32,7 @@ const Hobby = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
         }}
       />
     </div>

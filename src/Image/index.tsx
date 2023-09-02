@@ -10,7 +10,7 @@ const textStyle: CSSProperties = {
 };
 
 const Image = () => {
-  const [data, isLoading, refresh] = useAxios(getImage);
+  const [data, isLoading, refresh] = useAxios<any>(getImage);
 
   if (isLoading) {
     return <Loader />;
@@ -26,7 +26,7 @@ const Image = () => {
       <Button
         title="Generate new"
         onClick={() => {
-          refresh({});
+          refresh();
         }}
       />
     </div>

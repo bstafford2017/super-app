@@ -3,6 +3,7 @@ import { getFact } from '../Http/client';
 import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
+import { FactResponse } from 'Http/types';
 
 const textStyle: CSSProperties = {
   color: 'white',
@@ -10,7 +11,7 @@ const textStyle: CSSProperties = {
 };
 
 const Fact = () => {
-  const [data, isLoading, refresh] = useAxios(getFact);
+  const [data, isLoading, refresh] = useAxios<FactResponse[]>(getFact);
 
   if (isLoading) {
     return <Loader />;
@@ -25,7 +26,7 @@ const Fact = () => {
   return (
     <div>
       <p style={textStyle}>{fact}</p>
-      <Button title="Generate new" onClick={() => refresh({})} />
+      <Button title="Generate new" onClick={() => refresh()} />
     </div>
   );
 };

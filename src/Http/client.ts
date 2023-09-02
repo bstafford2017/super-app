@@ -1,4 +1,16 @@
+import { AxiosResponse } from 'axios';
 import axios from './axios';
+import {
+  AirQualityResponse,
+  BucketListResponse,
+  DadJokeResponse,
+  FactResponse,
+  HobbyResponse,
+  RiddleResponse,
+  TriviaResponse,
+  WeatherResponse,
+  WordResponse,
+} from './types';
 
 const data: any = {};
 
@@ -8,7 +20,6 @@ export const preFetch = (): Promise<any> => {
     getTrivia(),
     getRiddle(),
     getDadJoke(),
-    getQuote(),
     getAirQuality(),
     getBucketList(),
     getHobby(),
@@ -18,7 +29,9 @@ export const preFetch = (): Promise<any> => {
   ]);
 };
 
-export const getFact = (refresh: boolean = true): Promise<any> => {
+export const getFact = (
+  refresh: boolean = true
+): Promise<AxiosResponse<FactResponse[]>> => {
   if (data.fact && !refresh) {
     return data.fact;
   }
@@ -27,7 +40,9 @@ export const getFact = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getTrivia = (refresh: boolean = true): Promise<any> => {
+export const getTrivia = (
+  refresh: boolean = true
+): Promise<AxiosResponse<TriviaResponse[]>> => {
   if (data.trivia && !refresh) {
     return data.trivia;
   }
@@ -36,7 +51,9 @@ export const getTrivia = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getRiddle = (refresh: boolean = true): Promise<any> => {
+export const getRiddle = (
+  refresh: boolean = true
+): Promise<AxiosResponse<RiddleResponse[]>> => {
   if (data.riddle && !refresh) {
     return data.riddle;
   }
@@ -45,7 +62,9 @@ export const getRiddle = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getDadJoke = (refresh: boolean = true): Promise<any> => {
+export const getDadJoke = (
+  refresh: boolean = true
+): Promise<AxiosResponse<DadJokeResponse[]>> => {
   if (data.joke && !refresh) {
     return data.joke;
   }
@@ -54,16 +73,9 @@ export const getDadJoke = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getQuote = (refresh: boolean = true): Promise<any> => {
-  if (data.quote && !refresh) {
-    return data.quote;
-  }
-  const res = axios.get('/v1/quotes');
-  data.quote = res;
-  return res;
-};
-
-export const getAirQuality = (refresh: boolean = true): Promise<any> => {
+export const getAirQuality = (
+  refresh: boolean = true
+): Promise<AxiosResponse<AirQualityResponse>> => {
   if (data.airQuality && !refresh) {
     return data.airQuality;
   }
@@ -76,7 +88,9 @@ export const getAirQuality = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getBucketList = (refresh: boolean = true): Promise<any> => {
+export const getBucketList = (
+  refresh: boolean = true
+): Promise<AxiosResponse<BucketListResponse>> => {
   if (data.bucketList && !refresh) {
     return data.bucketList;
   }
@@ -85,7 +99,9 @@ export const getBucketList = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getHobby = (refresh: boolean = true): Promise<any> => {
+export const getHobby = (
+  refresh: boolean = true
+): Promise<AxiosResponse<HobbyResponse>> => {
   if (data.hobby && !refresh) {
     return data.hobby;
   }
@@ -98,7 +114,9 @@ export const getHobby = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getImage = (refresh: boolean = true): Promise<any> => {
+export const getImage = (
+  refresh: boolean = true
+): Promise<AxiosResponse<any>> => {
   if (data.image && !refresh) {
     return data.image;
   }
@@ -112,7 +130,9 @@ export const getImage = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getWeather = (refresh: boolean = true): Promise<any> => {
+export const getWeather = (
+  refresh: boolean = true
+): Promise<AxiosResponse<WeatherResponse>> => {
   if (data.weather && !refresh) {
     return data.weather;
   }
@@ -123,7 +143,9 @@ export const getWeather = (refresh: boolean = true): Promise<any> => {
   return res;
 };
 
-export const getWord = (refresh: boolean = true): Promise<any> => {
+export const getWord = (
+  refresh: boolean = true
+): Promise<AxiosResponse<WordResponse>> => {
   if (data.word && !refresh) {
     return data.word;
   }
