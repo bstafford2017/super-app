@@ -12,6 +12,7 @@ import DadJoke from './DadJoke';
 import Weather from './Weather';
 import AirQuality from './AirQuality';
 import Word from './Word';
+import NationalToday from './NationalToday';
 import { BackgroundContext } from './Contexts';
 
 import './App.css';
@@ -64,6 +65,7 @@ const App = (): JSX.Element => {
             <Link to="/bucket" text="Bucket List" />
             <Link to="/joke" text="Dad Joke" />
             <Link to="/hobby" text="Hobby" />
+            <Link to="/national-today" text="National Today" />
           </div>
           <header className="App-header">
             <div style={{ margin: '30px' }}>
@@ -78,6 +80,7 @@ const App = (): JSX.Element => {
                 <Route path="/bucket" element={<BucketList />} />
                 <Route path="/joke" element={<DadJoke />} />
                 <Route path="/hobby" element={<Hobby />} />
+                <Route path="/national-today" element={<NationalToday />} />
                 <Route
                   path="*"
                   element={
