@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Fact from './Fact';
@@ -13,18 +13,13 @@ import Weather from './Weather';
 import AirQuality from './AirQuality';
 import Word from './Word';
 import NationalToday from './NationalToday';
-import { BackgroundContext } from './Contexts';
+import Login from './Login';
+import AuthRoute from './AuthRoute';
+import { authStatus, preFetch } from './Http/client';
+import Loader from './Loader';
 
 import './App.css';
 import './index.css';
-import { preFetch } from './Http/client';
-
-const randomRgbColor = () => {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  return `rgb(${r}, ${g}, ${b})`;
-};
 
 const containerStyle: CSSProperties = {
   cursor: 'pointer',
@@ -35,67 +30,177 @@ const textStyle: CSSProperties = {
   fontSize: '42px',
 };
 
-const backgroundColor = randomRgbColor();
-
-(async () => {
-  await preFetch();
-})();
+// (async () => {
+//   await preFetch();
+// })();
 
 const App = (): JSX.Element => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        await authStatus();
+        setIsAuthenticated(true);
+      } catch (e) {
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  });
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <BrowserRouter>
-      <BackgroundContext.Provider value={backgroundColor}>
-        <div
-          className="App"
-          style={{
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            background:
-              'linear-gradient(180deg, rgba(255,122,113,1) 0%, rgba(250,152,110,1) 100%)',
-          }}
-        >
-          <div style={{ display: 'flex' }}>
-            <Link to="/weather" text="Weather" />
-            <Link to="/air" text="Air Quality" />
-            <Link to="/fact" text="Fact" />
-            <Link to="/trivia" text="Trivia" />
-            <Link to="/riddle" text="Riddle" />
-            <Link to="/image" text="Image" />
-            <Link to="/word" text="Word" />
-            <Link to="/bucket" text="Bucket List" />
-            <Link to="/joke" text="Dad Joke" />
-            <Link to="/hobby" text="Hobby" />
-            <Link to="/national-today" text="National Today" />
-          </div>
-          <header className="App-header">
-            <div style={{ margin: '30px' }}>
-              <Routes>
-                <Route path="/weather" element={<Weather />} />
-                <Route path="/air" element={<AirQuality />} />
-                <Route path="/fact" element={<Fact />} />
-                <Route path="/trivia" element={<Trivia />} />
-                <Route path="/riddle" element={<Riddle />} />
-                <Route path="/image" element={<Image />} />
-                <Route path="/word" element={<Word />} />
-                <Route path="/bucket" element={<BucketList />} />
-                <Route path="/joke" element={<DadJoke />} />
-                <Route path="/hobby" element={<Hobby />} />
-                <Route path="/national-today" element={<NationalToday />} />
-                <Route
-                  path="*"
-                  element={
-                    <div>
-                      <p style={textStyle}>
-                        <i>Please select an option above</i>
-                      </p>
-                    </div>
-                  }
-                />
-              </Routes>
-            </div>
-          </header>
+      {isLoading && <Loader />}
+      <div
+        className="App"
+        style={{
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          background:
+            'linear-gradient(180deg, rgba(255,122,113,1) 0%, rgba(250,152,110,1) 100%)',
+        }}
+      >
+        <div style={{ display: 'flex' }}>
+          {!isAuthenticated ? (
+            <Link to="/" text="Home" />
+          ) : (
+            <>
+              <Link to="/weather" text="Weather" />
+              <Link to="/air" text="Air Quality" />
+              <Link to="/fact" text="Fact" />
+              <Link to="/trivia" text="Trivia" />
+              <Link to="/riddle" text="Riddle" />
+              <Link to="/image" text="Image" />
+              <Link to="/word" text="Word" />
+              <Link to="/bucket" text="Bucket List" />
+              <Link to="/joke" text="Dad Joke" />
+              <Link to="/hobby" text="Hobby" />
+              <Link to="/national-today" text="National Today" />
+            </>
+          )}
         </div>
-      </BackgroundContext.Provider>
+        <header className="App-header">
+          <div style={{ margin: '30px' }}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Login
+                    setIsAuthenticated={setIsAuthenticated}
+                    setIsLoading={setIsLoading}
+                  />
+                }
+              />
+              <Route
+                path="/weather"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Weather />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/air"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <AirQuality />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/fact"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Fact />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/trivia"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Trivia />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/riddle"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Riddle />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/image"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Image />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/word"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Word />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/bucket"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <BucketList />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/joke"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <DadJoke />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/hobby"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <Hobby />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/national-today"
+                element={
+                  <AuthRoute isAuthenticated={isAuthenticated}>
+                    <NationalToday />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <div>
+                    <p style={textStyle}>
+                      <i>Please select an option above</i>
+                    </p>
+                  </div>
+                }
+              />
+            </Routes>
+          </div>
+        </header>
+      </div>
     </BrowserRouter>
   );
 };

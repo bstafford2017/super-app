@@ -1,7 +1,9 @@
 import { AxiosResponse } from 'axios';
-import axios from './axios';
+import axios, { serverless } from './axios';
 import {
   AirQualityResponse,
+  AuthStatus,
+  AuthStatusResponse,
   BucketListResponse,
   DadJokeResponse,
   FactResponse,
@@ -13,6 +15,33 @@ import {
 } from './types';
 
 const data: any = {};
+
+export const authStatus = (): Promise<AxiosResponse<AuthStatus>> => {
+  return Promise.reject({
+    data: {},
+    status: 400,
+    headers: {},
+    config: {},
+    statusText: 'OK',
+  });
+  // return serverless.get('/super-app/auth_status');
+};
+
+export const login = (
+  userId: string,
+  password: string
+): Promise<AxiosResponse<AuthStatusResponse>> => {
+  return Promise.resolve({
+    data: {
+      userId: 'testydev',
+    },
+    status: 200,
+    headers: {},
+    config: {},
+    statusText: 'OK',
+  });
+  return serverless.post('/super-app/login');
+};
 
 export const preFetch = (): Promise<any> => {
   return Promise.all([

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
 
 const useAxios = <T,>(
-  funct: (val: boolean) => Promise<AxiosResponse<T>>
+  funct: (val?: any) => Promise<AxiosResponse<T>>
 ): [
   T | null,
   boolean,

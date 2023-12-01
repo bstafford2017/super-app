@@ -1,3 +1,17 @@
+export type AuthStatus =
+  | {
+      userId: string;
+    }
+  | {};
+
+export interface AuthStatusResponse {
+  userId: string | undefined;
+}
+
+export interface LoginResponse {
+  token: string;
+}
+
 export interface FactResponse {
   fact: string;
 }

@@ -28,7 +28,8 @@ const Link = ({ to = '', text = '' }: LinkProps): JSX.Element => {
       to={to}
       style={{
         color: hover ? '#e6e6e6' : 'white',
-        textDecoration: active ? 'underline 2px' : 'none',
+        textDecoration: active ? 'underline 1px' : 'none',
+        textUnderlineOffset: '10px',
         padding: '25px',
         fontSize: '20px',
       }}
