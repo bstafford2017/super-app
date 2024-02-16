@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import Fact from './Fact';
 import Trivia from './Trivia';
@@ -36,6 +37,18 @@ const textStyle: CSSProperties = {
 
 const backgroundColor = randomRgbColor();
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 122, 113, 1) 0%,
+      rgba(250, 152, 110, 1) 100%
+    );
+  }
+`;
+
 (async () => {
   await preFetch();
 })();
@@ -44,6 +57,7 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
+        <GlobalStyle />
         <div className="App">
           <div style={{ display: 'flex' }}>
             <Link to="/weather" text="Weather" />
