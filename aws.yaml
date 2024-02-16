@@ -51,7 +51,7 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - '*.super-app.us'
+          - '*.the-super-app.com'
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -93,7 +93,7 @@ Resources:
     Properties:
       HostedZoneId: Z01898142DWDY1JY5FOPD
       RecordSets:
-        - Name: '*.super-app.us'
+        - Name: '*.the-super-app.com'
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2 # general cloudfront hosted zone id
@@ -103,9 +103,9 @@ Resources:
   SuperAppCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: '*.super-app.us'
+      DomainName: '*.the-super-app.com'
       DomainValidationOptions:
-        - DomainName: '*.super-app.us'
+        - DomainName: '*.the-super-app.com'
           HostedZoneId: Z01898142DWDY1JY5FOPD # route 53 zone
       ValidationMethod: DNS
 
