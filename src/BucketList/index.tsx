@@ -25,7 +25,7 @@ const BucketList = () => {
   const { item } = data;
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <p style={textStyle}>{item}</p>
       <Button
         title="Generate new"

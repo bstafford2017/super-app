@@ -11,6 +11,7 @@ import {
   WeatherResponse,
   WordResponse,
 } from './types';
+import { LOCATIONS } from '../Weather';
 
 const data: any = {};
 
@@ -20,7 +21,6 @@ export const preFetch = (): Promise<any> => {
     getTrivia(),
     getRiddle(),
     getDadJoke(),
-    getAirQuality(),
     getBucketList(),
     getHobby(),
     getImage(),
@@ -73,21 +73,6 @@ export const getDadJoke = (
   return res;
 };
 
-export const getAirQuality = (
-  refresh: boolean = true
-): Promise<AxiosResponse<AirQualityResponse>> => {
-  if (data.airQuality && !refresh) {
-    return data.airQuality;
-  }
-  const res = axios.get('/v1/airquality', {
-    params: {
-      city: 'Saint Paul',
-    },
-  });
-  data.airQuality = res;
-  return res;
-};
-
 export const getBucketList = (
   refresh: boolean = true
 ): Promise<AxiosResponse<BucketListResponse>> => {
@@ -131,13 +116,14 @@ export const getImage = (
 };
 
 export const getWeather = (
-  refresh: boolean = true
+  refresh: boolean = true,
+  zipcode: string = LOCATIONS[0].zipcode
 ): Promise<AxiosResponse<WeatherResponse>> => {
   if (data.weather && !refresh) {
     return data.weather;
   }
   const res = axios.get('/v1/weather', {
-    params: { zip: '55101' },
+    params: { zip: zipcode },
   });
   data.weather = res;
   return res;

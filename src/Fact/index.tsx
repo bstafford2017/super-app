@@ -24,7 +24,7 @@ const Fact = () => {
   const { fact } = data[0];
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <p style={textStyle}>{fact}</p>
       <Button title="Generate new" onClick={() => refresh()} />
     </div>

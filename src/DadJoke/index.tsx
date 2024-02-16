@@ -25,7 +25,7 @@ const DadJoke = () => {
   const { joke } = firstJoke;
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <p style={textStyle}>{joke}</p>
       <Button
         title="Generate new"

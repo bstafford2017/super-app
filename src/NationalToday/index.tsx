@@ -6,8 +6,16 @@ const NationalToday = () => {
       <iframe
         src="https://nationaltoday.com/"
         title="National Today"
-        height={720}
-        width={1080}
+        style={{
+          display: 'block',
+          width: '100vw',
+          height: '100vh',
+          maxWidth: '100%',
+          margin: 0,
+          padding: 0,
+          border: '0 none',
+          boxSizing: 'border-box',
+        }}
       ></iframe>
     </div>
   );

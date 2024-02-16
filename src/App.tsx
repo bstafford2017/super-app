@@ -10,7 +10,6 @@ import Hobby from './Hobby';
 import Image from './Image';
 import DadJoke from './DadJoke';
 import Weather from './Weather';
-import AirQuality from './AirQuality';
 import Word from './Word';
 import NationalToday from './NationalToday';
 import { BackgroundContext } from './Contexts';
@@ -45,18 +44,9 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
-        <div
-          className="App"
-          style={{
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            background:
-              'linear-gradient(180deg, rgba(255,122,113,1) 0%, rgba(250,152,110,1) 100%)',
-          }}
-        >
+        <div className="App">
           <div style={{ display: 'flex' }}>
             <Link to="/weather" text="Weather" />
-            <Link to="/air" text="Air Quality" />
             <Link to="/fact" text="Fact" />
             <Link to="/trivia" text="Trivia" />
             <Link to="/riddle" text="Riddle" />
@@ -67,11 +57,10 @@ const App = (): JSX.Element => {
             <Link to="/hobby" text="Hobby" />
             <Link to="/national-today" text="National Today" />
           </div>
-          <header className="App-header">
-            <div style={{ margin: '30px' }}>
+          <main className="App-header">
+            <div style={{ marginTop: '10px' }}>
               <Routes>
                 <Route path="/weather" element={<Weather />} />
-                <Route path="/air" element={<AirQuality />} />
                 <Route path="/fact" element={<Fact />} />
                 <Route path="/trivia" element={<Trivia />} />
                 <Route path="/riddle" element={<Riddle />} />
@@ -93,7 +82,7 @@ const App = (): JSX.Element => {
                 />
               </Routes>
             </div>
-          </header>
+          </main>
         </div>
       </BackgroundContext.Provider>
     </BrowserRouter>

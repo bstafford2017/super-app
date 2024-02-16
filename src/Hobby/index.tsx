@@ -25,7 +25,7 @@ const Hobby = () => {
   const { hobby, link } = data;
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <a href={link} style={textStyle}>
         {hobby}
       </a>

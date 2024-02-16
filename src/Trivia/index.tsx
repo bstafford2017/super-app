@@ -30,7 +30,7 @@ const Trivia = () => {
   const { question, answer } = data[0] || {};
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <p style={textStyle}>Q: {question}</p>
       {showAnswer && <p style={textStyle}>A: {answer} </p>}
       <Button title="Show answer" disabled={showAnswer} onClick={show} />
