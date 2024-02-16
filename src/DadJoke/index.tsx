@@ -4,11 +4,12 @@ import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getDadJoke } from '../Http/client';
 import { DadJokeResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const DadJoke = () => {
   const [data, isLoading, refresh] = useAxios<DadJokeResponse[]>(getDadJoke);
@@ -26,7 +27,7 @@ const DadJoke = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <p style={textStyle}>{joke}</p>
+      <Text>{joke}</Text>
       <Button
         title="Generate new"
         onClick={() => {

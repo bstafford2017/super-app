@@ -4,11 +4,12 @@ import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { FactResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const Fact = () => {
   const [data, isLoading, refresh] = useAxios<FactResponse[]>(getFact);
@@ -25,7 +26,7 @@ const Fact = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <p style={textStyle}>{fact}</p>
+      <Text>{fact}</Text>
       <Button title="Generate new" onClick={() => refresh()} />
     </div>
   );

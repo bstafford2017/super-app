@@ -4,11 +4,12 @@ import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getBucketList } from '../Http/client';
 import { BucketListResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const BucketList = () => {
   const [data, isLoading, refresh] =
@@ -26,7 +27,7 @@ const BucketList = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <p style={textStyle}>{item}</p>
+      <Text>{item}</Text>
       <Button
         title="Generate new"
         onClick={() => {

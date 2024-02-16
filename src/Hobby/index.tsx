@@ -4,12 +4,13 @@ import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { getHobby } from '../Http/client';
 import { HobbyResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-  display: 'block',
-};
+const Text = styled.a`
+  color: white;
+  font-size: 42px;
+  display: block;
+`;
 
 const Hobby = () => {
   const [data, isLoading, refresh] = useAxios<HobbyResponse>(getHobby);
@@ -26,9 +27,7 @@ const Hobby = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <a href={link} style={textStyle}>
-        {hobby}
-      </a>
+      <Text href={link}>{hobby}</Text>
       <Button
         title="Generate new"
         onClick={() => {

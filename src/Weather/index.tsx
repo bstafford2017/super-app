@@ -3,28 +3,36 @@ import Loader from '../Loader';
 import useAxios from '../Hooks/useAxios';
 import { getWeather } from '../Http/client';
 import { WeatherResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-  margin: '0px',
-};
+const Heading = styled.h2`
+  color: white;
+  font-size: 42px;
+  margin: 0px;
+`;
 
-const leftAlign: CSSProperties = {
-  textAlign: 'left',
-};
+const TableRow = styled.tr`
+  color: white;
+  font-size: 42px;
+  margin: 0px;
+`;
 
-const buttonStyle: CSSProperties = {
-  cursor: 'pointer',
-  padding: '15px',
-  fontFamily: 'Roboto',
-  fontSize: '24px',
-  borderRadius: '25px',
-  borderStyle: 'solid',
-  backgroundColor: 'rgba(0,0,0,0)',
-  color: 'white',
-  borderColor: 'white',
-};
+const TableData = styled.td`
+  text-align: left;
+`;
+
+const CustomButton = styled.button`
+  cursor: pointer;
+  padding: 15px;
+  font-family: 'Roboto';
+  font-size: 24px;
+  border-radius: 25px;
+  border-style: solid;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-color: white;
+`;
+
 const convertToFahrenheit = (val: string): number => {
   return Math.round(Number(val) * 1.8 + 32);
 };
@@ -82,39 +90,39 @@ const Weather = () => {
     <div style={{ textAlign: 'center' }}>
       <div style={{ margin: '10px' }}>
         {LOCATIONS.map((l) => (
-          <button name={l.name} onClick={onClickLocation} style={buttonStyle}>
+          <CustomButton name={l.name} onClick={onClickLocation}>
             {l.name}
-          </button>
+          </CustomButton>
         ))}
       </div>
-      <h2 style={textStyle}>
+      <Heading>
         <b>{currentLocation.name}</b>
-      </h2>
+      </Heading>
       <table style={{ width: '100%' }}>
-        <tr style={textStyle}>
-          <td style={leftAlign}>Temperature:</td>
+        <TableRow>
+          <TableData>Temperature:</TableData>
           <td>{convertToFahrenheit(temp)}&deg;F</td>
-        </tr>
-        <tr style={textStyle}>
-          <td style={leftAlign}>Feels like:</td>
+        </TableRow>
+        <TableRow>
+          <TableData>Feels like:</TableData>
           <td>{convertToFahrenheit(feels_like)}&deg;F</td>
-        </tr>
-        <tr style={textStyle}>
-          <td style={leftAlign}>High:</td>
+        </TableRow>
+        <TableRow>
+          <TableData>High:</TableData>
           <td>{convertToFahrenheit(max_temp)}&deg;F</td>
-        </tr>
-        <tr style={textStyle}>
-          <td style={leftAlign}>Low:</td>
+        </TableRow>
+        <TableRow>
+          <TableData>Low:</TableData>
           <td>{convertToFahrenheit(min_temp)}&deg;</td>
-        </tr>
-        <tr style={textStyle}>
-          <td style={leftAlign}>Precipitation:</td>
+        </TableRow>
+        <TableRow>
+          <TableData>Precipitation:</TableData>
           <td>{cloud_pct}%</td>
-        </tr>
-        <tr style={textStyle}>
-          <td style={leftAlign}>Wind speed:</td>
+        </TableRow>
+        <TableRow>
+          <TableData>Wind speed:</TableData>
           <td>{wind_speed}</td>
-        </tr>
+        </TableRow>
       </table>
     </div>
   );

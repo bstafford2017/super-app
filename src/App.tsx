@@ -26,14 +26,14 @@ const randomRgbColor = () => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const containerStyle: CSSProperties = {
-  cursor: 'pointer',
-};
+const Container = styled.div`
+  cursor: pointer;
+`;
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const backgroundColor = randomRgbColor();
 
@@ -88,9 +88,9 @@ const App = (): JSX.Element => {
                   path="*"
                   element={
                     <div>
-                      <p style={textStyle}>
+                      <Text>
                         <i>Please select an option above</i>
-                      </p>
+                      </Text>
                     </div>
                   }
                 />

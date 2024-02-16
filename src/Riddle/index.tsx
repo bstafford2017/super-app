@@ -4,11 +4,12 @@ import Loader from '../Loader';
 import Button from '../Button';
 import useAxios from '../Hooks/useAxios';
 import { RiddleResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const Riddle = () => {
   const [data, isLoading, refresh] = useAxios<RiddleResponse[]>(getRiddle);
@@ -31,8 +32,8 @@ const Riddle = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <p style={textStyle}>Q: {question}</p>
-      {showAnswer && <p style={textStyle}>A: {answer} </p>}
+      <Text>Q: {question}</Text>
+      {showAnswer && <Text>A: {answer} </Text>}
       <Button title="Show answer" disabled={showAnswer} onClick={show} />
       <Button
         title="Generate new"

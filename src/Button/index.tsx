@@ -1,15 +1,16 @@
+import styled from 'styled-components';
 import { BackgroundContext } from '../Contexts';
 import React, { CSSProperties, useContext, useState } from 'react';
 
-const buttonStyle: CSSProperties = {
-  cursor: 'pointer',
-  margin: '25px',
-  padding: '15px',
-  fontFamily: 'Roboto',
-  fontSize: '24px',
-  borderRadius: '25px',
-  borderStyle: 'solid',
-};
+const CustomButton = styled.button`
+  cursor: pointer;
+  margin: 25px;
+  padding: 15px;
+  font-family: 'Roboto';
+  font-size: 24px;
+  border-radius: 25px;
+  border-style: solid;
+`;
 
 interface ButtonProps {
   title: string;
@@ -35,9 +36,8 @@ const Button = ({
   };
 
   return (
-    <button
+    <CustomButton
       style={{
-        ...buttonStyle,
         color: isActive ? '#e6e6e6' : 'white',
         borderColor: isActive ? '#e6e6e6' : 'white',
         backgroundColor: 'rgba(0,0,0,0)',
@@ -48,7 +48,7 @@ const Button = ({
       onMouseLeave={onLeave}
     >
       {title}
-    </button>
+    </CustomButton>
   );
 };
 

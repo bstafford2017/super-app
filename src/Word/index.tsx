@@ -3,11 +3,12 @@ import { getWord } from '../Http/client';
 import Loader from '../Loader';
 import useAxios from '../Hooks/useAxios';
 import { WordResponse } from 'Http/types';
+import styled from 'styled-components';
 
-const textStyle: CSSProperties = {
-  color: 'white',
-  fontSize: '42px',
-};
+const Text = styled.p`
+  color: white;
+  font-size: 42px;
+`;
 
 const Word = () => {
   const [data, isLoading] = useAxios<WordResponse>(getWord);
@@ -24,7 +25,7 @@ const Word = () => {
 
   return (
     <div>
-      <p style={textStyle}>{word}</p>
+      <Text>{word}</Text>
     </div>
   );
 };
