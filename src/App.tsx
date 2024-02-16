@@ -35,16 +35,6 @@ const Text = styled.p`
   font-size: 42px;
 `;
 
-const AppContainer = styled.div`
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 122, 113, 1) 0%,
-    rgba(250, 152, 110, 1) 100%
-  );
-`;
-
 const backgroundColor = randomRgbColor();
 
 (async () => {
@@ -55,7 +45,7 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
-        <AppContainer className="App">
+        <div className="App">
           <div style={{ display: 'flex' }}>
             <Link to="/weather" text="Weather" />
             <Link to="/fact" text="Fact" />
@@ -94,7 +84,7 @@ const App = (): JSX.Element => {
               </Routes>
             </div>
           </main>
-        </AppContainer>
+        </div>
       </BackgroundContext.Provider>
     </BrowserRouter>
   );
