@@ -35,19 +35,17 @@ const Text = styled.p`
   font-size: 42px;
 `;
 
-const backgroundColor = randomRgbColor();
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 122, 113, 1) 0%,
-      rgba(250, 152, 110, 1) 100%
-    );
-  }
+const AppContainer = styled.div`
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 122, 113, 1) 0%,
+    rgba(250, 152, 110, 1) 100%
+  );
 `;
+
+const backgroundColor = randomRgbColor();
 
 (async () => {
   await preFetch();
@@ -57,8 +55,7 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
-        <GlobalStyle />
-        <div className="App">
+        <AppContainer className="App">
           <div style={{ display: 'flex' }}>
             <Link to="/weather" text="Weather" />
             <Link to="/fact" text="Fact" />
@@ -97,7 +94,7 @@ const App = (): JSX.Element => {
               </Routes>
             </div>
           </main>
-        </div>
+        </AppContainer>
       </BackgroundContext.Provider>
     </BrowserRouter>
   );
