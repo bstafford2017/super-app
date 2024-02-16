@@ -35,6 +35,10 @@ const Text = styled.p`
   font-size: 42px;
 `;
 
+const AppWrapper = styled.div`
+  background-color: black;
+`;
+
 const backgroundColor = randomRgbColor();
 
 (async () => {
@@ -45,7 +49,7 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
-        <div className="App">
+        <AppWrapper className="App">
           <div style={{ display: 'flex' }}>
             <Link to="/weather" text="Weather" />
             <Link to="/fact" text="Fact" />
@@ -84,7 +88,7 @@ const App = (): JSX.Element => {
               </Routes>
             </div>
           </main>
-        </div>
+        </AppWrapper>
       </BackgroundContext.Provider>
     </BrowserRouter>
   );
