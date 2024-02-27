@@ -12,6 +12,10 @@ import Image from './Image';
 import DadJoke from './DadJoke';
 import Weather from './Weather';
 import Word from './Word';
+import Meme from './Meme';
+import Pun from './Pun';
+import Motivation from './Motivation';
+import Quote from './Quote';
 import NationalToday from './NationalToday';
 import { BackgroundContext } from './Contexts';
 
@@ -35,9 +39,7 @@ const Text = styled.p`
   font-size: 42px;
 `;
 
-const AppWrapper = styled.div`
-  background-color: black;
-`;
+const AppWrapper = styled.div``;
 
 const backgroundColor = randomRgbColor();
 
@@ -60,6 +62,10 @@ const App = (): JSX.Element => {
             <Link to="/bucket" text="Bucket List" />
             <Link to="/joke" text="Dad Joke" />
             <Link to="/hobby" text="Hobby" />
+            <Link to="/quote" text="Quote" />
+            {/* <Link to="/motivation" text="Motivation" /> */}
+            {/* <Link to="/pun" text="Pun" /> */}
+            <Link to="/meme" text="Meme" />
             <Link to="/national-today" text="National Today" />
           </div>
           <main className="App-header">
@@ -74,6 +80,10 @@ const App = (): JSX.Element => {
                 <Route path="/bucket" element={<BucketList />} />
                 <Route path="/joke" element={<DadJoke />} />
                 <Route path="/hobby" element={<Hobby />} />
+                <Route path="/quote" element={<Quote />} />
+                {/* <Route path="/motivation" element={<Motivation />} /> */}
+                {/* <Route path="/pun" element={<Pun />} /> */}
+                <Route path="/meme" element={<Meme />} />
                 <Route path="/national-today" element={<NationalToday />} />
                 <Route
                   path="*"

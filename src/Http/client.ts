@@ -1,11 +1,15 @@
 import { AxiosResponse } from 'axios';
-import axios from './axios';
+import axios, { genericAxios } from './axios';
 import {
   AirQualityResponse,
   BucketListResponse,
   DadJokeResponse,
   FactResponse,
   HobbyResponse,
+  MemeResponse,
+  MotivationResponse,
+  PunResponse,
+  QuoteResponse,
   RiddleResponse,
   TriviaResponse,
   WeatherResponse,
@@ -26,6 +30,10 @@ export const preFetch = (): Promise<any> => {
     getImage(),
     getWeather(),
     getWord(),
+    getQuote(),
+    // getMotivation(),
+    // getPun(),
+    getMeme(),
   ]);
 };
 
@@ -137,5 +145,49 @@ export const getWord = (
   }
   const res = axios.get('/v1/randomword');
   data.word = res;
+  return res;
+};
+
+export const getQuote = (
+  refresh: boolean = true
+): Promise<AxiosResponse<QuoteResponse[]>> => {
+  if (data.quote && !refresh) {
+    return data.quote;
+  }
+  const res = genericAxios.get('https://api.quotable.io/quotes/random');
+  data.quote = res;
+  return res;
+};
+
+export const getMotivation = (
+  refresh: boolean = true
+): Promise<AxiosResponse<MotivationResponse>> => {
+  if (data.motivation && !refresh) {
+    return data.quote;
+  }
+  const res = genericAxios.get('https://affirmations.dev');
+  data.motivation = res;
+  return res;
+};
+
+export const getMeme = (
+  refresh: boolean = true
+): Promise<AxiosResponse<MemeResponse>> => {
+  if (data.meme && !refresh) {
+    return data.meme;
+  }
+  const res = genericAxios.get('https://www.punapi.rest/api/meme');
+  data.meme = res;
+  return res;
+};
+
+export const getPun = (
+  refresh: boolean = true
+): Promise<AxiosResponse<PunResponse>> => {
+  if (data.pun && !refresh) {
+    return data.pun;
+  }
+  const res = genericAxios.get('https://www.punapi.rest/api/pun');
+  data.pun = res;
   return res;
 };

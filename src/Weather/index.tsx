@@ -4,21 +4,12 @@ import useAxios from '../Hooks/useAxios';
 import { getWeather } from '../Http/client';
 import { WeatherResponse } from 'Http/types';
 import styled from 'styled-components';
+import Table from './Table';
 
 const Heading = styled.h2`
   color: white;
   font-size: 42px;
   margin: 0px;
-`;
-
-const TableRow = styled.tr`
-  color: white;
-  font-size: 42px;
-  margin: 0px;
-`;
-
-const TableData = styled.td`
-  text-align: left;
 `;
 
 const CustomButton = styled.button`
@@ -32,10 +23,6 @@ const CustomButton = styled.button`
   color: white;
   border-color: white;
 `;
-
-const convertToFahrenheit = (val: string): number => {
-  return Math.round(Number(val) * 1.8 + 32);
-};
 
 export const LOCATIONS = [
   {
@@ -60,24 +47,9 @@ const Weather = () => {
   const [data, isLoading, refresh] = useAxios<WeatherResponse>(getWeather);
   const [currentLocation, setCurrentLocation] = useState(LOCATIONS[0]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   if (!data) {
     return null;
   }
-
-  const {
-    temp,
-    feels_like,
-    max_temp,
-    min_temp,
-    cloud_pct,
-    wind_speed,
-    sunrise,
-    sunset,
-  } = data || {};
 
   const onClickLocation = (e: any) => {
     const newLocation =
@@ -98,32 +70,7 @@ const Weather = () => {
       <Heading>
         <b>{currentLocation.name}</b>
       </Heading>
-      <table style={{ width: '100%' }}>
-        <TableRow>
-          <TableData>Temperature:</TableData>
-          <td>{convertToFahrenheit(temp)}&deg;F</td>
-        </TableRow>
-        <TableRow>
-          <TableData>Feels like:</TableData>
-          <td>{convertToFahrenheit(feels_like)}&deg;F</td>
-        </TableRow>
-        <TableRow>
-          <TableData>High:</TableData>
-          <td>{convertToFahrenheit(max_temp)}&deg;F</td>
-        </TableRow>
-        <TableRow>
-          <TableData>Low:</TableData>
-          <td>{convertToFahrenheit(min_temp)}&deg;</td>
-        </TableRow>
-        <TableRow>
-          <TableData>Precipitation:</TableData>
-          <td>{cloud_pct}%</td>
-        </TableRow>
-        <TableRow>
-          <TableData>Wind speed:</TableData>
-          <td>{wind_speed}</td>
-        </TableRow>
-      </table>
+      {isLoading ? <Loader /> : <Table {...data} />}
     </div>
   );
 };
