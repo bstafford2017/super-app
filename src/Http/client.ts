@@ -1,19 +1,15 @@
 import { AxiosResponse } from 'axios';
 import axios, { genericAxios } from './axios';
 import {
-  AirQualityResponse,
+  AdviceResponse,
   BucketListResponse,
   DadJokeResponse,
   FactResponse,
   HobbyResponse,
-  MemeResponse,
-  MotivationResponse,
-  PunResponse,
-  QuoteResponse,
+  NewsResponse,
   RiddleResponse,
   TriviaResponse,
   WeatherResponse,
-  WordResponse,
 } from './types';
 import { LOCATIONS } from '../Weather';
 
@@ -29,11 +25,9 @@ export const preFetch = (): Promise<any> => {
     getHobby(),
     getImage(),
     getWeather(),
-    getWord(),
     getQuote(),
-    // getMotivation(),
-    // getPun(),
-    getMeme(),
+    getNews(),
+    getAdvice(),
   ]);
 };
 
@@ -61,11 +55,11 @@ export const getTrivia = (
 
 export const getRiddle = (
   refresh: boolean = true
-): Promise<AxiosResponse<RiddleResponse[]>> => {
+): Promise<AxiosResponse<RiddleResponse>> => {
   if (data.riddle && !refresh) {
     return data.riddle;
   }
-  const res = axios.get('/v1/riddles');
+  const res = genericAxios.get('https://riddles-api.vercel.app/random');
   data.riddle = res;
   return res;
 };
@@ -137,57 +131,37 @@ export const getWeather = (
   return res;
 };
 
-export const getWord = (
-  refresh: boolean = true
-): Promise<AxiosResponse<WordResponse>> => {
-  if (data.word && !refresh) {
-    return data.word;
-  }
-  const res = axios.get('/v1/randomword');
-  data.word = res;
-  return res;
-};
-
 export const getQuote = (
   refresh: boolean = true
-): Promise<AxiosResponse<QuoteResponse[]>> => {
+): Promise<AxiosResponse<string[]>> => {
   if (data.quote && !refresh) {
     return data.quote;
   }
-  const res = genericAxios.get('https://api.quotable.io/quotes/random');
+  const res = genericAxios.get(
+    'https://ron-swanson-quotes.herokuapp.com/v2/quotes'
+  );
   data.quote = res;
   return res;
 };
 
-export const getMotivation = (
+export const getNews = (
   refresh: boolean = true
-): Promise<AxiosResponse<MotivationResponse>> => {
-  if (data.motivation && !refresh) {
-    return data.quote;
+): Promise<AxiosResponse<NewsResponse>> => {
+  if (data.news && !refresh) {
+    return data.news;
   }
-  const res = genericAxios.get('https://affirmations.dev');
-  data.motivation = res;
+  const res = genericAxios.get('https://ok.surf/api/v1/cors/news-feed');
+  data.news = res;
   return res;
 };
 
-export const getMeme = (
+export const getAdvice = (
   refresh: boolean = true
-): Promise<AxiosResponse<MemeResponse>> => {
-  if (data.meme && !refresh) {
-    return data.meme;
+): Promise<AxiosResponse<AdviceResponse>> => {
+  if (data.advice && !refresh) {
+    return data.advice;
   }
-  const res = genericAxios.get('https://www.punapi.rest/api/meme');
-  data.meme = res;
-  return res;
-};
-
-export const getPun = (
-  refresh: boolean = true
-): Promise<AxiosResponse<PunResponse>> => {
-  if (data.pun && !refresh) {
-    return data.pun;
-  }
-  const res = genericAxios.get('https://www.punapi.rest/api/pun');
-  data.pun = res;
+  const res = genericAxios.get('https://api.adviceslip.com/advice');
+  data.advice = res;
   return res;
 };

@@ -12,7 +12,7 @@ const Text = styled.p`
 `;
 
 const Riddle = () => {
-  const [data, isLoading, refresh] = useAxios<RiddleResponse[]>(getRiddle);
+  const [data, isLoading, refresh] = useAxios<RiddleResponse>(getRiddle);
 
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -28,11 +28,11 @@ const Riddle = () => {
     return null;
   }
 
-  const { question, answer } = data[0];
+  const { riddle, answer } = data;
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Text>Q: {question}</Text>
+      <Text>Q: {riddle}</Text>
       {showAnswer && <Text>A: {answer} </Text>}
       <Button title="Show answer" disabled={showAnswer} onClick={show} />
       <Button

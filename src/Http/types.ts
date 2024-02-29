@@ -8,7 +8,7 @@ export interface TriviaResponse {
 }
 
 export interface RiddleResponse {
-  question: string;
+  riddle: string;
   answer: string;
 }
 
@@ -50,19 +50,36 @@ export interface WordResponse {
   word: string;
 }
 
-export interface QuoteResponse {
-  content: string;
-  author: string;
+export interface TodayResponse {
+  date: string;
+  wikipedia: string;
+  events: [
+    {
+      year: number;
+      description: string;
+    }
+  ];
 }
 
-export interface MotivationResponse {
-  affirmation: string;
+export interface NewsResponse {
+  Business: [
+    {
+      link: string;
+      source: string;
+      title: string;
+    }
+  ];
+  Technology: [
+    {
+      link: string;
+      source: string;
+      title: string;
+    }
+  ];
 }
 
-export interface MemeResponse {
-  meme: string;
-}
-
-export interface PunResponse {
-  pun: string;
+export interface AdviceResponse {
+  slip: {
+    advice: string;
+  };
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import useAxios from '../Hooks/useAxios';
 import { getQuote } from '../Http/client';
-import { QuoteResponse } from '../Http/types';
 import Loader from '../Loader';
 import Button from '../Button';
 import styled from 'styled-components';
@@ -12,7 +11,7 @@ const Text = styled.p`
 `;
 
 const Quote = () => {
-  const [data, isLoading, refresh] = useAxios<QuoteResponse[]>(getQuote);
+  const [data, isLoading, refresh] = useAxios<string[]>(getQuote);
 
   if (isLoading) {
     return <Loader />;
@@ -22,12 +21,9 @@ const Quote = () => {
     return null;
   }
 
-  const { content, author } = data[0];
-
   return (
     <div>
-      <Text>{content}</Text>
-      <Text>By: {author}</Text>
+      <Text>{data[0]}</Text>
       <Button
         title="Generate new"
         onClick={() => {

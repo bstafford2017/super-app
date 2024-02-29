@@ -1,11 +1,5 @@
 body {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 122, 113, 1) 0%,
-    rgba(250, 152, 110, 1) 100%
-  );
+  background: #343a40;
 }
 
 .App {

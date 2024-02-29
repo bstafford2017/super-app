@@ -1,9 +1,9 @@
 import React from 'react';
-import useAxios from '../Hooks/useAxios';
-import { getMotivation, getPun } from '../Http/client';
-import { MotivationResponse, PunResponse } from '../Http/types';
 import Loader from '../Loader';
 import Button from '../Button';
+import useAxios from '../Hooks/useAxios';
+import { getAdvice } from '../Http/client';
+import { AdviceResponse } from 'Http/types';
 import styled from 'styled-components';
 
 const Text = styled.p`
@@ -11,9 +11,8 @@ const Text = styled.p`
   font-size: 42px;
 `;
 
-const Motivation = () => {
-  const [data, isLoading, refresh] =
-    useAxios<MotivationResponse>(getMotivation);
+const Advice = () => {
+  const [data, isLoading, refresh] = useAxios<AdviceResponse>(getAdvice);
 
   if (isLoading) {
     return <Loader />;
@@ -23,9 +22,13 @@ const Motivation = () => {
     return null;
   }
 
+  const {
+    slip: { advice },
+  } = data;
+
   return (
-    <div>
-      <Text>{data.affirmation}</Text>
+    <div style={{ textAlign: 'center' }}>
+      <Text>{advice}</Text>
       <Button
         title="Generate new"
         onClick={() => {
@@ -36,4 +39,4 @@ const Motivation = () => {
   );
 };
 
-export default Motivation;
+export default Advice;

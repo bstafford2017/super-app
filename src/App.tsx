@@ -11,11 +11,10 @@ import Hobby from './Hobby';
 import Image from './Image';
 import DadJoke from './DadJoke';
 import Weather from './Weather';
-import Word from './Word';
-import Meme from './Meme';
-import Pun from './Pun';
-import Motivation from './Motivation';
 import Quote from './Quote';
+import News from './News';
+import Gif from './Gif';
+import Advice from './Advice';
 import NationalToday from './NationalToday';
 import { BackgroundContext } from './Contexts';
 
@@ -52,20 +51,19 @@ const App = (): JSX.Element => {
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
         <AppWrapper className="App">
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', borderBottom: 'solid 1px' }}>
             <Link to="/weather" text="Weather" />
             <Link to="/fact" text="Fact" />
             <Link to="/trivia" text="Trivia" />
             <Link to="/riddle" text="Riddle" />
             <Link to="/image" text="Image" />
-            <Link to="/word" text="Word" />
             <Link to="/bucket" text="Bucket List" />
             <Link to="/joke" text="Dad Joke" />
             <Link to="/hobby" text="Hobby" />
-            <Link to="/quote" text="Quote" />
-            {/* <Link to="/motivation" text="Motivation" /> */}
-            {/* <Link to="/pun" text="Pun" /> */}
-            <Link to="/meme" text="Meme" />
+            <Link to="/ron-quote" text="Ron Quote" />
+            <Link to="/advice" text="Advice" />
+            <Link to="/gif" text="Gif" />
+            <Link to="/news" text="News" />
             <Link to="/national-today" text="National Today" />
           </div>
           <main className="App-header">
@@ -76,14 +74,13 @@ const App = (): JSX.Element => {
                 <Route path="/trivia" element={<Trivia />} />
                 <Route path="/riddle" element={<Riddle />} />
                 <Route path="/image" element={<Image />} />
-                <Route path="/word" element={<Word />} />
                 <Route path="/bucket" element={<BucketList />} />
                 <Route path="/joke" element={<DadJoke />} />
                 <Route path="/hobby" element={<Hobby />} />
-                <Route path="/quote" element={<Quote />} />
-                {/* <Route path="/motivation" element={<Motivation />} /> */}
-                {/* <Route path="/pun" element={<Pun />} /> */}
-                <Route path="/meme" element={<Meme />} />
+                <Route path="/ron-quote" element={<Quote />} />
+                <Route path="/advice" element={<Advice />} />
+                <Route path="/gif" element={<Gif />} />
+                <Route path="/news" element={<News />} />
                 <Route path="/national-today" element={<NationalToday />} />
                 <Route
                   path="*"
