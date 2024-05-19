@@ -7,7 +7,7 @@ import { HobbyResponse } from 'Http/types';
 import styled from 'styled-components';
 
 const Text = styled.a`
-  color: white;
+  color: black;
   font-size: 42px;
   display: block;
 `;

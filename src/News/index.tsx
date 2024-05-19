@@ -6,17 +6,17 @@ import Loader from '../Loader';
 import styled from 'styled-components';
 
 const Text = styled.p`
-  color: white;
+  color: black;
   font-size: 42px;
 `;
 
 const InnerText = styled.p`
-  color: white;
+  color: black;
   font-size: 18px;
 `;
 
 const Link = styled.a`
-  text-decoration-color: white;
+  text-decoration-color: black;
   font-weight: bold;
 `;
 

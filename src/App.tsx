@@ -20,6 +20,7 @@ import { BackgroundContext } from './Contexts';
 import './App.css';
 import './index.css';
 import { preFetch } from './Http/client';
+import Navigation from './Navigation';
 
 const randomRgbColor = () => {
   const r = Math.floor(Math.random() * 256);
@@ -33,7 +34,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.p`
-  color: white;
+  color: black;
   font-size: 42px;
 `;
 
@@ -50,47 +51,30 @@ const App = (): JSX.Element => {
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
         <AppWrapper className="App">
-          <div style={{ display: 'flex' }}>
-            <Link to="/fact" text="Fact" />
-            <Link to="/trivia" text="Trivia" />
-            <Link to="/riddle" text="Riddle" />
-            <Link to="/image" text="Image" />
-            <Link to="/bucket" text="Bucket List" />
-            <Link to="/joke" text="Dad Joke" />
-            <Link to="/hobby" text="Hobby" />
-            <Link to="/ron-quote" text="Ron Quote" />
-            <Link to="/advice" text="Advice" />
-            <Link to="/gif" text="Gif" />
-            <Link to="/news" text="News" />
-            <Link to="/national-today" text="National Today" />
-          </div>
-          <main className="App-header">
-            <div style={{ marginTop: '10px' }}>
-              <Routes>
-                <Route path="/fact" element={<Fact />} />
-                <Route path="/trivia" element={<Trivia />} />
-                <Route path="/riddle" element={<Riddle />} />
-                <Route path="/image" element={<Image />} />
-                <Route path="/bucket" element={<BucketList />} />
-                <Route path="/joke" element={<DadJoke />} />
-                <Route path="/hobby" element={<Hobby />} />
-                <Route path="/ron-quote" element={<Quote />} />
-                <Route path="/advice" element={<Advice />} />
-                <Route path="/gif" element={<Gif />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/national-today" element={<NationalToday />} />
-                <Route
-                  path="*"
-                  element={
-                    <div>
-                      <Text>
-                        <i>Please select an option above</i>
-                      </Text>
-                    </div>
-                  }
-                />
-              </Routes>
-            </div>
+          <Navigation />
+          <main>
+            <Routes>
+              <Route path="/fact" element={<Fact />} />
+              <Route path="/trivia" element={<Trivia />} />
+              <Route path="/riddle" element={<Riddle />} />
+              <Route path="/image" element={<Image />} />
+              <Route path="/bucket" element={<BucketList />} />
+              <Route path="/joke" element={<DadJoke />} />
+              <Route path="/hobby" element={<Hobby />} />
+              <Route path="/ron-quote" element={<Quote />} />
+              <Route path="/advice" element={<Advice />} />
+              <Route path="/gif" element={<Gif />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/national-today" element={<NationalToday />} />
+              <Route
+                path="*"
+                element={
+                  <Text>
+                    <i>Please select an option above</i>
+                  </Text>
+                }
+              />
+            </Routes>
           </main>
         </AppWrapper>
       </BackgroundContext.Provider>

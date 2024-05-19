@@ -7,7 +7,7 @@ import { TriviaResponse } from 'Http/types';
 import styled from 'styled-components';
 
 const Text = styled.p`
-  color: white;
+  color: black;
   font-size: 42px;
 `;
 
