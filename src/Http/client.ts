@@ -9,9 +9,7 @@ import {
   NewsResponse,
   RiddleResponse,
   TriviaResponse,
-  WeatherResponse,
 } from './types';
-import { LOCATIONS } from '../Weather';
 
 const data: any = {};
 
@@ -24,7 +22,6 @@ export const preFetch = (): Promise<any> => {
     getBucketList(),
     getHobby(),
     getImage(),
-    getWeather(),
     getQuote(),
     getNews(),
     getAdvice(),
@@ -70,7 +67,7 @@ export const getDadJoke = (
   if (data.joke && !refresh) {
     return data.joke;
   }
-  const res = axios.get('/v1/dadjokes?limit=1');
+  const res = axios.get('/v1/dadjokes');
   data.joke = res;
   return res;
 };
@@ -114,20 +111,6 @@ export const getImage = (
     },
   });
   data.image = res;
-  return res;
-};
-
-export const getWeather = (
-  refresh: boolean = true,
-  zipcode: string = LOCATIONS[0].zipcode
-): Promise<AxiosResponse<WeatherResponse>> => {
-  if (data.weather && !refresh) {
-    return data.weather;
-  }
-  const res = axios.get('/v1/weather', {
-    params: { zip: zipcode },
-  });
-  data.weather = res;
   return res;
 };
 

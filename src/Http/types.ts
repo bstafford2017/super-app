@@ -67,6 +67,7 @@ export interface NewsResponse {
       link: string;
       source: string;
       title: string;
+      og: string;
     }
   ];
   Technology: [
@@ -74,6 +75,39 @@ export interface NewsResponse {
       link: string;
       source: string;
       title: string;
+      og: string;
+    }
+  ];
+  Health: [
+    {
+      link: string;
+      source: string;
+      title: string;
+      og: string;
+    }
+  ];
+  Science: [
+    {
+      link: string;
+      source: string;
+      title: string;
+      og: string;
+    }
+  ];
+  Sports: [
+    {
+      link: string;
+      source: string;
+      title: string;
+      og: string;
+    }
+  ];
+  Entertainment: [
+    {
+      link: string;
+      source: string;
+      title: string;
+      og: string;
     }
   ];
 }

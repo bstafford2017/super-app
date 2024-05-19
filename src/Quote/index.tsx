@@ -6,7 +6,7 @@ import Button from '../Button';
 import styled from 'styled-components';
 
 const Text = styled.p`
-  color: white;
+  color: black;
   font-size: 42px;
 `;
 
