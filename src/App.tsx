@@ -10,7 +10,6 @@ import BucketList from './BucketList';
 import Hobby from './Hobby';
 import Image from './Image';
 import DadJoke from './DadJoke';
-import Weather from './Weather';
 import Quote from './Quote';
 import News from './News';
 import Gif from './Gif';
@@ -51,8 +50,7 @@ const App = (): JSX.Element => {
     <BrowserRouter>
       <BackgroundContext.Provider value={backgroundColor}>
         <AppWrapper className="App">
-          <div style={{ display: 'flex', borderBottom: 'solid 1px' }}>
-            <Link to="/weather" text="Weather" />
+          <div style={{ display: 'flex' }}>
             <Link to="/fact" text="Fact" />
             <Link to="/trivia" text="Trivia" />
             <Link to="/riddle" text="Riddle" />
@@ -69,7 +67,6 @@ const App = (): JSX.Element => {
           <main className="App-header">
             <div style={{ marginTop: '10px' }}>
               <Routes>
-                <Route path="/weather" element={<Weather />} />
                 <Route path="/fact" element={<Fact />} />
                 <Route path="/trivia" element={<Trivia />} />
                 <Route path="/riddle" element={<Riddle />} />
