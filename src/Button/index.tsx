@@ -38,8 +38,8 @@ const Button = ({
   return (
     <CustomButton
       style={{
-        color: isActive ? '#e6e6e6' : 'white',
-        borderColor: isActive ? '#e6e6e6' : 'white',
+        color: isActive ? '#707070' : 'black',
+        borderColor: isActive ? '#707070' : 'black',
         backgroundColor: 'rgba(0,0,0,0)',
       }}
       disabled={disabled}
