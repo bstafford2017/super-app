@@ -10,7 +10,6 @@ import BucketList from './BucketList';
 import Hobby from './Hobby';
 import Image from './Image';
 import DadJoke from './DadJoke';
-import Quote from './Quote';
 import News from './News';
 import Gif from './Gif';
 import Advice from './Advice';
@@ -52,7 +51,7 @@ const App = (): JSX.Element => {
       <BackgroundContext.Provider value={backgroundColor}>
         <AppWrapper className="App">
           <Navigation />
-          <main>
+          <main style={{ paddingTop: '75px' }}>
             <Routes>
               <Route path="/fact" element={<Fact />} />
               <Route path="/trivia" element={<Trivia />} />
@@ -61,7 +60,6 @@ const App = (): JSX.Element => {
               <Route path="/bucket" element={<BucketList />} />
               <Route path="/joke" element={<DadJoke />} />
               <Route path="/hobby" element={<Hobby />} />
-              <Route path="/ron-quote" element={<Quote />} />
               <Route path="/advice" element={<Advice />} />
               <Route path="/gif" element={<Gif />} />
               <Route path="/news" element={<News />} />
@@ -70,7 +68,7 @@ const App = (): JSX.Element => {
                 path="*"
                 element={
                   <Text>
-                    <i>Please select an option above</i>
+                    <i>Please select an option</i>
                   </Text>
                 }
               />

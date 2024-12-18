@@ -10,7 +10,6 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { grey } from '@mui/material/colors';
 
 export interface NavItem {
   id: number;
@@ -19,70 +18,71 @@ export interface NavItem {
   text: string;
 }
 
+const IconStyles = {
+  color: 'white',
+  '&:hover': {
+    color: 'grey',
+  },
+};
+
 export default [
   {
     id: 1,
-    icon: <SchoolIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <SchoolIcon sx={IconStyles} fontSize="large" />,
     link: '/fact',
     text: 'Fact',
   },
   {
     id: 2,
-    icon: <FactCheckIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <FactCheckIcon sx={IconStyles} fontSize="large" />,
     link: '/trivia',
     text: 'Trivia',
   },
   {
     id: 3,
-    icon: <PsychologyAltIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <PsychologyAltIcon sx={IconStyles} fontSize="large" />,
     link: '/riddle',
     text: 'Riddle',
   },
   {
     id: 4,
-    icon: <CameraAltIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <CameraAltIcon sx={IconStyles} fontSize="large" />,
     link: '/image',
     text: 'Image',
   },
   {
     id: 5,
-    icon: <TheaterComedyIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <TheaterComedyIcon sx={IconStyles} fontSize="large" />,
     link: '/joke',
     text: 'Dad joke',
   },
   {
     id: 6,
-    icon: <GolfCourseIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <GolfCourseIcon sx={IconStyles} fontSize="large" />,
     link: '/hobby',
     text: 'Hobby',
   },
   {
     id: 7,
-    icon: <TheatersIcon sx={{ color: grey[100] }} fontSize="large" />,
-    link: '/ron-quote',
-    text: 'Ron Quote',
-  },
-  {
-    id: 8,
-    icon: <ThumbUpAltIcon sx={{ color: grey[100] }} fontSize="large" />,
+    icon: <ThumbUpAltIcon sx={IconStyles} fontSize="large" />,
     link: '/advice',
     text: 'Advice',
   },
   {
-    id: 9,
-    icon: <CenterFocusStrongIcon sx={{ color: grey[100] }} fontSize="large" />,
+    id: 8,
+    icon: <CenterFocusStrongIcon sx={IconStyles} fontSize="large" />,
     link: '/gif',
     text: 'GIF',
   },
   {
-    id: 10,
-    icon: <NewspaperIcon sx={{ color: grey[100] }} fontSize="large" />,
+    id: 9,
+    icon: <NewspaperIcon sx={IconStyles} fontSize="large" />,
     link: '/news',
     text: 'News',
   },
   {
-    id: 11,
-    icon: <CalendarMonthIcon sx={{ color: grey[100] }} fontSize="large" />,
+    id: 10,
+    icon: <CalendarMonthIcon sx={IconStyles} fontSize="large" />,
     link: '/national-today',
     text: 'National day',
   },
