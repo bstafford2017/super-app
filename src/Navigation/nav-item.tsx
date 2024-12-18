@@ -1,6 +1,6 @@
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Divider } from '@mui/material';
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const IconWrapper = styled.div`
@@ -14,9 +14,9 @@ const NavLinkItem = styled(NavLink)`
   text-decoration: none;
 `;
 
-const NavItemText = styled.span<{ $isOpen?: boolean }>`
+const NavItemText = styled.span<{ $selected?: boolean }>`
   padding-left: 16px;
-  color: white;
+  color: ${(props) => (props.$selected ? 'grey' : 'white')};
   bottom: 10px;
   &:hover {
     color: grey;
@@ -33,11 +33,15 @@ export interface NavItemProps {
 }
 
 export const NavItem = ({ link }: NavItemProps) => {
+  let location = useLocation();
+
+  const selected = location.pathname === link.link;
+
   return (
     <NavLinkItem to={link.link}>
       <IconWrapper>
         <div>{link.icon}</div>
-        <NavItemText>{link.text}</NavItemText>
+        <NavItemText $selected={selected}>{link.text}</NavItemText>
       </IconWrapper>
       <Divider color="grey" />
     </NavLinkItem>

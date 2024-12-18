@@ -51,7 +51,7 @@ const App = (): JSX.Element => {
       <BackgroundContext.Provider value={backgroundColor}>
         <AppWrapper className="App">
           <Navigation />
-          <main>
+          <main style={{ paddingTop: '75px' }}>
             <Routes>
               <Route path="/fact" element={<Fact />} />
               <Route path="/trivia" element={<Trivia />} />
