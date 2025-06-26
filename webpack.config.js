@@ -1,8 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+const env = process.env.NODE_ENV || 'development';
 
 module.exports = {
   entry: './src/index.tsx',
-  mode: 'production',
+  mode: env,
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -26,6 +30,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   performance: {
     hints: false,
@@ -37,4 +42,16 @@ module.exports = {
       inject: true,
     }),
   ],
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://nqufs2zgid.execute-api.us-east-1.amazonaws.com/',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+        secure: true,
+      },
+    },
+    port: 8080,
+    historyApiFallback: true,
+  },
 };

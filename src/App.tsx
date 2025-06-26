@@ -1,82 +1,105 @@
-import React, { CSSProperties } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
-
-import Fact from './Fact';
-import Trivia from './Trivia';
-import Riddle from './Riddle';
-import Link from './Link';
-import BucketList from './BucketList';
-import Hobby from './Hobby';
-import Image from './Image';
-import DadJoke from './DadJoke';
-import News from './News';
-import Gif from './Gif';
-import Advice from './Advice';
-import NationalToday from './NationalToday';
-import { BackgroundContext } from './Contexts';
-
-import './App.css';
-import './index.css';
-import { preFetch } from './Http/client';
-import Navigation from './Navigation';
-
-const randomRgbColor = () => {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  return `rgb(${r}, ${g}, ${b})`;
-};
-
-const Container = styled.div`
-  cursor: pointer;
-`;
-
-const Text = styled.p`
-  color: black;
-  font-size: 42px;
-`;
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import type { PaletteMode } from '@mui/material';
+import styled from 'styled-components';
+import Fact from 'components/pages/ask';
+import NationalToday from 'components/pages/national-today';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Navigation from 'components/layout/navigation';
 
 const AppWrapper = styled.div``;
 
-const backgroundColor = randomRgbColor();
+const queryClient = new QueryClient();
 
-(async () => {
-  await preFetch();
-})();
+const CLIENT_ID = 'bf8cdaqjoqh3o5fu7fd3brc20';
+// const REDIRECT_URI = 'https://the-super-app.com';
+const REDIRECT_URI = 'http://localhost:8080/';
+const COGNITO_LOGIN_URL =
+  'https://super-app-user-domain.auth.us-east-1.amazoncognito.com/login?client_id=bf8cdaqjoqh3o5fu7fd3brc20&response_type=code&scope=email+openid+profile&redirect_uri=' +
+  encodeURIComponent(REDIRECT_URI);
+const COGNITO_TOKEN_URL =
+  'https://super-app-user-domain.auth.us-east-1.amazoncognito.com/oauth2/token';
 
 const App = (): JSX.Element => {
+  const [accessToken, setAccessToken] = useState<string | null>(() =>
+    sessionStorage.getItem('access_token')
+  );
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const mode: PaletteMode = prefersDarkMode ? 'dark' : 'light';
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          primary: {
+            main: '#1976d2',
+          },
+          secondary: {
+            main: '#dc004e',
+          },
+        },
+      }),
+    [mode]
+  );
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (!code && !accessToken) {
+      window.location.replace(COGNITO_LOGIN_URL);
+      return;
+    }
+    if (accessToken) return; // Already have token
+    // If code exists, exchange it for an access token
+    const fetchToken = async () => {
+      try {
+        const body = new URLSearchParams({
+          grant_type: 'authorization_code',
+          client_id: CLIENT_ID,
+          code: code!,
+          redirect_uri: REDIRECT_URI,
+        });
+        const response = await fetch(COGNITO_TOKEN_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body,
+        });
+        if (!response.ok) throw new Error('Token request failed');
+        const data = await response.json();
+        if (data.access_token) {
+          setAccessToken(data.access_token);
+          sessionStorage.setItem('access_token', data.access_token);
+        }
+      } catch (err) {
+        window.location.replace(COGNITO_LOGIN_URL);
+      }
+    };
+    if (code) fetchToken();
+  }, [location.search, accessToken]);
+
   return (
-    <BrowserRouter>
-      <BackgroundContext.Provider value={backgroundColor}>
-        <AppWrapper className="App">
-          <Navigation />
-          <main style={{ paddingTop: '75px' }}>
-            <Routes>
-              <Route path="/fact" element={<Fact />} />
-              <Route path="/trivia" element={<Trivia />} />
-              <Route path="/riddle" element={<Riddle />} />
-              <Route path="/image" element={<Image />} />
-              <Route path="/bucket" element={<BucketList />} />
-              <Route path="/joke" element={<DadJoke />} />
-              <Route path="/hobby" element={<Hobby />} />
-              <Route path="/advice" element={<Advice />} />
-              <Route path="/gif" element={<Gif />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/national-today" element={<NationalToday />} />
-              <Route
-                path="*"
-                element={
-                  <Text>
-                    <i>Please select an option</i>
-                  </Text>
-                }
-              />
-            </Routes>
-          </main>
-        </AppWrapper>
-      </BackgroundContext.Provider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <AppWrapper className="App">
+            <Navigation />
+            <main>
+              <Routes>
+                <Route path="/" element={<Fact accessToken={accessToken} />} />
+                <Route path="/national-today" element={<NationalToday />} />
+              </Routes>
+            </main>
+          </AppWrapper>
+        </BrowserRouter>
+      </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 
