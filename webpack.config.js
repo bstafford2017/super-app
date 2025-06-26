@@ -43,14 +43,15 @@ module.exports = {
     }),
   ],
   devServer: {
-    proxy: {
-      '/api': {
+    proxy: [
+      {
+        context: ['/api'],
         target: 'https://nqufs2zgid.execute-api.us-east-1.amazonaws.com/',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
         secure: true,
       },
-    },
+    ],
     port: 8080,
     historyApiFallback: true,
   },

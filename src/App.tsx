@@ -23,7 +23,7 @@ const COGNITO_LOGIN_URL =
 const COGNITO_TOKEN_URL =
   'https://super-app-user-domain.auth.us-east-1.amazoncognito.com/oauth2/token';
 
-const App = (): JSX.Element => {
+const App = () => {
   const [accessToken, setAccessToken] = useState<string | null>(() =>
     sessionStorage.getItem('access_token')
   );

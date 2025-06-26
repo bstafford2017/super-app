@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { useNavigate } from 'react-router-dom';
 
-export const Navigation = (): JSX.Element => {
+export const Navigation = () => {
   const navigate = useNavigate();
 
   return (
