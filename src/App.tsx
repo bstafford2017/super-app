@@ -15,11 +15,16 @@ const AppWrapper = styled.div``;
 const queryClient = new QueryClient();
 
 const CLIENT_ID = 'bf8cdaqjoqh3o5fu7fd3brc20';
-// const REDIRECT_URI = 'https://the-super-app.com';
-const REDIRECT_URI = 'http://localhost:8080/';
-const COGNITO_LOGIN_URL =
-  'https://super-app-user-domain.auth.us-east-1.amazoncognito.com/login?client_id=bf8cdaqjoqh3o5fu7fd3brc20&response_type=code&scope=email+openid+profile&redirect_uri=' +
-  encodeURIComponent(REDIRECT_URI);
+
+const getRedirectURI = (): string => {
+  return window.location.hostname === 'localhost'
+    ? 'http://localhost:8080/'
+    : 'https://the-super-app.com/';
+};
+
+const COGNITO_LOGIN_URL = `https://super-app-user-domain.auth.us-east-1.amazoncognito.com/login?client_id=${CLIENT_ID}&response_type=code&scope=email+openid+profile&redirect_uri=${encodeURIComponent(
+  getRedirectURI()
+)}`;
 const COGNITO_TOKEN_URL =
   'https://super-app-user-domain.auth.us-east-1.amazoncognito.com/oauth2/token';
 
@@ -61,7 +66,7 @@ const App = () => {
           grant_type: 'authorization_code',
           client_id: CLIENT_ID,
           code: code!,
-          redirect_uri: REDIRECT_URI,
+          redirect_uri: getRedirectURI(),
         });
         const response = await fetch(COGNITO_TOKEN_URL, {
           method: 'POST',
