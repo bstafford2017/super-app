@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'http/axios';
+import axios from 'utils/axios';
 
 export const useAsk = () => {
   return useMutation({
