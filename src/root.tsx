@@ -19,7 +19,7 @@ const CLIENT_ID = 'bf8cdaqjoqh3o5fu7fd3brc20';
 const getRedirectURI = (): string => {
   return window.location.hostname === 'localhost'
     ? 'http://localhost:8080/'
-    : 'https://the-super-app.com/';
+    : 'https://www.the-super-app.com/';
 };
 
 const COGNITO_LOGIN_URL = `https://super-app-user-domain.auth.us-east-1.amazoncognito.com/login?client_id=${CLIENT_ID}&response_type=code&scope=email+openid+profile&redirect_uri=${encodeURIComponent(
