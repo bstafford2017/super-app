@@ -61,6 +61,20 @@ Resources:
           TargetOriginId: SuperAppOrigin
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # CORS-S3Origin
+        CacheBehaviors:
+          - PathPattern: /stage-prod/*
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+              - PUT
+              - POST
+              - PATCH
+              - DELETE
+            TargetOriginId: ApiGatewayOrigin
+            ViewerProtocolPolicy: https-only
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
+            OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # CORS-S3Origin
         DefaultRootObject: index.html
         Enabled: true
         CustomErrorResponses:
@@ -75,6 +89,10 @@ Resources:
             DomainName: !GetAtt SuperAppBucket.RegionalDomainName
             OriginAccessControlId: !GetAtt SuperAppOriginAccessControl.Id
             S3OriginConfig: {}
+          - Id: ApiGatewayOrigin
+            DomainName: nqufs2zgid.execute-api.us-east-1.amazonaws.com
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
         ViewerCertificate:
           AcmCertificateArn: !Ref SuperAppCertificate
           SslSupportMethod: sni-only
