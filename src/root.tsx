@@ -66,7 +66,7 @@ const App = () => {
           grant_type: 'authorization_code',
           client_id: CLIENT_ID,
           code: code!,
-          redirect_uri: encodeURIComponent(getRedirectURI()),
+          redirect_uri: getRedirectURI(),
         });
         const response = await fetch(COGNITO_TOKEN_URL, {
           method: 'POST',
