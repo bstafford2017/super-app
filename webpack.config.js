@@ -46,7 +46,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api'],
-        target: 'https://nqufs2zgid.execute-api.us-east-1.amazonaws.com/',
+        target: 'https://the-super-app.com',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
         secure: true,

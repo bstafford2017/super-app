@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAsk } from 'queries/use-ask';
 import { CircularProgress, TextField, Typography } from '@mui/material';
+import { List } from './recommend/list';
+import { useRecommend } from 'queries/use-recommend';
 
 const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
   background-color: #282c34;
 `;
 
@@ -33,24 +33,46 @@ interface FactProps {
   accessToken: string | null;
 }
 
+const cleanResponse = (response: string) => {
+  const parts = response.split(':');
+  if (response.includes(':') && parts.length > 1) {
+    return parts[1].trim();
+  }
+  return response;
+};
+
 const Fact = ({ accessToken }: FactProps) => {
-  const { data = {}, mutate: ask, isPending } = useAsk();
+  const { data: askData = {}, mutate: ask, isPending: isPendingAsk } = useAsk();
+  const {
+    data: recommendData = {},
+    mutate: recommend,
+    isPending: isPendingRecommend,
+  } = useRecommend();
 
   const [prompt, setPrompt] = React.useState<string>(
     'Tell me a fact about the world!'
   );
 
-  const { data: axiosData = {} } = data as any;
-  const { response = '' } = axiosData;
+  const { data: axiosAskData = {} } = askData as any;
+  const { response: askResponse = '' } = axiosAskData;
+
+  const { data: axiosRecommendData = {} } = recommendData as any;
+  const { response: recommendResponse = '' } = axiosRecommendData;
 
   const onSubmit = () => {
     ask({ prompt, accessToken });
   };
 
+  const onRecommendClick = (topic: string) => {
+    recommend({ topic, accessToken });
+    setPrompt(`Tell me a fact about ${topic}`);
+  };
+
   return (
     <Container>
+      <List onClick={onRecommendClick} />
       <ResponseWrapper>
-        {isPending ? (
+        {isPendingAsk || isPendingRecommend ? (
           <CircularProgress color="info" />
         ) : (
           <Typography
@@ -58,10 +80,13 @@ const Fact = ({ accessToken }: FactProps) => {
             style={{
               color: 'white',
               textAlign: 'center',
+              paddingTop: '55px',
               paddingBottom: '55px',
             }}
           >
-            {response || 'No response yet'}
+            {askResponse ||
+              cleanResponse(recommendResponse) ||
+              'No response yet'}
           </Typography>
         )}
       </ResponseWrapper>

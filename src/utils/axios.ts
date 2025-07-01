@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: '/stage-prod',
+  baseURL: '/api/stage-prod',
   timeout: 5000,
 });
