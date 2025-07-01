@@ -50,7 +50,7 @@ export const List = ({ onClick }: { onClick: (topic: string) => void }) => {
       {topics.map((topic, index) => (
         <Grid
           key={index}
-          size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+          size={{ xs: 12, sm: 4, md: 3 }}
           sx={{ display: 'flex', justifyContent: 'center' }}
         >
           <TopicCard

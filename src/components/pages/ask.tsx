@@ -24,9 +24,9 @@ const ResponseWrapper = styled.div`
 const InputRow = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
   width: 100%;
   max-width: 600px;
+  margin-bottom: 150px;
 `;
 
 interface FactProps {
