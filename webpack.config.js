@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 
 module.exports = {
   entry: './src/index.tsx',
