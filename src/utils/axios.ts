@@ -1,6 +1,9 @@
 import axios from 'axios';
 
+const isDev = process.env.NODE_ENV === 'development';
+const baseURL = isDev ? '/api/stage-prod/' : '/stage-prod';
+
 export default axios.create({
-  baseURL: '/api/stage-prod',
+  baseURL,
   timeout: 5000,
 });
