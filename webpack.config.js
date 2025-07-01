@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'production';
 module.exports = {
   entry: './src/index.tsx',
   mode: env,
-  devtool: 'source-map',
+  devtool: env === 'production' ? false : 'source-map',
   module: {
     rules: [
       {
