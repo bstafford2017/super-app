@@ -93,13 +93,13 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AppWrapper className="App">
-            <Navigation />
             <main>
               <Routes>
                 <Route path="/" element={<Fact accessToken={accessToken} />} />
                 <Route path="/national-today" element={<NationalToday />} />
               </Routes>
             </main>
+            <Navigation />
           </AppWrapper>
         </BrowserRouter>
       </ThemeProvider>

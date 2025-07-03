@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "NODE_ENV=development npx webpack serve",
-    "build": "npx webpack",
+    "build": "NODE_ENV=production npx webpack",
     "test": "jest --passWithNoTests",
     "provision": "aws cloudformation deploy --region us-east-1 --template-file ./aws.yaml --stack-name super-app-stack --parameter-overrides BucketName=the-super-app AccountId=749936333804",
     "upload": "aws s3 sync dist/ s3://the-super-app --delete",
