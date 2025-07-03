@@ -51,6 +51,7 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
+          - 'the-super-app.com'
           - '*.the-super-app.com'
         DefaultCacheBehavior:
           AllowedMethods:
@@ -127,9 +128,13 @@ Resources:
   SuperAppCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: '*.the-super-app.com'
+      DomainName: 'the-super-app.com'
+      SubjectAlternativeNames:
+        - 'www.the-super-app.com'
       DomainValidationOptions:
-        - DomainName: '*.the-super-app.com'
+        - DomainName: 'the-super-app.com'
+          HostedZoneId: Z0781836ZE9KD7KZM7LM # route 53 zone
+        - DomainName: 'www.the-super-app.com'
           HostedZoneId: Z0781836ZE9KD7KZM7LM # route 53 zone
       ValidationMethod: DNS
 
