@@ -52,6 +52,12 @@ const Fact = ({ accessToken }: FactProps) => {
   const [prompt, setPrompt] = React.useState<string>(
     'Tell me a fact about the world!'
   );
+  const [conversation, setConversation] = React.useState<
+    {
+      role: 'user' | 'assistant';
+      text: string;
+    }[]
+  >([]);
 
   const { data: axiosAskData = {} } = askData as any;
   const { response: askResponse = '' } = axiosAskData;
@@ -60,7 +66,23 @@ const Fact = ({ accessToken }: FactProps) => {
   const { response: recommendResponse = '' } = axiosRecommendData;
 
   const onSubmit = () => {
-    ask({ prompt, accessToken });
+    if (!prompt || prompt.trim() === '') return;
+
+    ask(
+      { prompt, accessToken, conversation_history: conversation },
+      {
+        onSuccess: () => {
+          setConversation((prev) => [
+            ...prev,
+            { role: 'user', text: prompt },
+            {
+              role: 'assistant',
+              text: askResponse || cleanResponse(recommendResponse),
+            },
+          ]);
+        },
+      }
+    );
   };
 
   const onRecommendClick = (topic: string) => {

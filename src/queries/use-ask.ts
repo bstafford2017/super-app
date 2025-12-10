@@ -7,21 +7,18 @@ export const useAsk = () => {
     mutationFn: ({
       prompt,
       accessToken,
+      conversation_history,
     }: {
       prompt: string;
       accessToken: string | null;
+      conversation_history?: any;
     }) => {
-      return axios.post(
-        '/ask',
-        {
-          prompt,
+      const body: any = { prompt, conversation_history };
+      return axios.post('/ask', body, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      });
     },
   });
 };
