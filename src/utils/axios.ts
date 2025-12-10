@@ -5,5 +5,5 @@ const baseURL = isDev ? '/api/stage-prod/' : '/stage-prod';
 
 export default axios.create({
   baseURL,
-  timeout: 5000,
+  timeout: 30000,
 });
